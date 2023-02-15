@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\MyWishList;
 use App\Models\FoodCategory;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;

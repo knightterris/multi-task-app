@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function () {
         Route::get('product/delete/cover_image/{id}',[ProductController::class,'deleteCoverimage'])->name('admin.product.deleteCoverImage');
         Route::get('product/delete/each_image/{id}',[ProductController::class,'deleteEachImage'])->name('admin.product.deleteEachImage');
         Route::get('product/delete/product',[ProductController::class,'deleteProduct'])->name('admin.product.delete');
+        Route::post('product/wishList',[ProductController::class,'addWishList'])->name('admin.product.addWishList');
     });
 });
 Route::prefix('user')->group(function () {

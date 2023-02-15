@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Storage;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\MyWishList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    //create food
     public function createFood(Request $request){
         $this->foodValidation($request);
         $data = $this->getProductData($request);
@@ -72,6 +72,14 @@ class ProductController extends Controller
         Product::where('id',$request->product_id)->delete();
         Image::where('product_id',$request->product_id)->delete();
         return"A product has been deleted.";
+    }
+    public function addWishList(Request $request){
+        $data = [
+            'product_id'=>$request->product_id,
+            'user_id'=>Auth::user()->id,
+        ];
+        MyWishList::create($data);
+        return "You have added this product to wishlist.";
     }
 
     private function foodValidation($request){

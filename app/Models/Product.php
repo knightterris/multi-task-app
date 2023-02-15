@@ -17,7 +17,8 @@ class Product extends Model
         'count',
         'status',
         'created_by',
-        'product_type'
+        'product_type',
+        'like'
     ];
     //status=> 0 -> instock, 1 -> outofStock
 }
