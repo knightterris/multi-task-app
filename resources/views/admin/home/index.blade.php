@@ -8,6 +8,12 @@
     </style>
 @endsection
 @section('content')
+    @if (session('remove_success'))
+        <div class="alert alert-warning alert-dismissible fade show my-3" role="alert">
+            <strong>{{ session('remove_success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="row">
         @foreach ($data as $item)
             <div class="col-4">
@@ -62,15 +68,24 @@
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
                                 <i class="ti-heart me-2" data-id="{{ $item->id }}"></i>
-                                <span class="">20 Likes</span>
+                                <span class="">{{ $item->like }} Likes</span>
                                 <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                         title="See Details"></i></a>
                             </div>
                             <div class="">
-                                <button class="btn btn-primary wishlist" data-id="{{ $item->id }}">
-                                    <i class="ti-download"></i>
-                                    WishList
-                                </button>
+                                @if ($item->wishlist_status == 0)
+                                    <button class="btn btn-primary wishlist" data-id="{{ $item->id }}">
+                                        <i class="ti-download"></i>
+                                        {{ trans('globalText.product.wishlist') }}
+                                    </button>
+                                @else
+                                    <a href="{{ route('admin.product.removeWishList', $item->id) }}">
+                                        <button class="btn btn-danger">
+                                            <i class="ti-trash"></i>
+                                            {{ trans('globalText.product.remove_wishlist') }}
+                                        </button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -110,7 +125,6 @@
             });
 
         })
-
         // $(document).on('click','.ti-heart',function(){
         //     var eachId = $(this).attr('data-id');
         //     alert(eachId)

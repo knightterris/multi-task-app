@@ -78,8 +78,16 @@ class ProductController extends Controller
             'product_id'=>$request->product_id,
             'user_id'=>Auth::user()->id,
         ];
+        $wishlist_status = [ 'wishlist_status'=>1 ];
         MyWishList::create($data);
+        Product::where('id',$request->product_id)->update($wishlist_status);
         return "You have added this product to wishlist.";
+    }
+    public function removeWishlist($id){
+        MyWishList::where('product_id',$id)->delete();
+        $data = [ 'wishlist_status'=>0 ];
+        Product::where('id',$id)->update($data);
+        return back()->with(['remove_success'=>'You have removed an item from your wishlist.']);
     }
 
     private function foodValidation($request){

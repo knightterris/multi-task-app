@@ -18,7 +18,8 @@ class Product extends Model
         'status',
         'created_by',
         'product_type',
-        'like'
+        'like',
+        'wishlist_status'
     ];
     //status=> 0 -> instock, 1 -> outofStock
 }

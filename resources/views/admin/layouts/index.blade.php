@@ -9,11 +9,15 @@
     <!-- theme meta -->
     <meta name="theme-name" content="focus" />
     @if (url()->current() == route('admin.homepage'))
-    <title>{{ trans('globalText.admin.home_page') }}</title>
+        <title>{{ trans('globalText.admin.home_page') }}</title>
     @else
         <title>@yield('title')</title>
     @endif
     <!-- ================= Favicon ================== -->
+    {{-- fontawesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
     <!-- Retina iPad Touch Icon-->
@@ -36,8 +40,9 @@
     <link href="{{ asset('home/admin/css/lib/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/helper.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/style.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-@yield('styles')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    @yield('styles')
 </head>
 
 <body>
@@ -62,11 +67,12 @@
                         </a>
                     </li>
 
-                    <li><a href="{{ route('admin.changePasswordPage') }}" ><i class="ti-key"></i> Password </a></li>
+                    <li><a href="{{ route('admin.changePasswordPage') }}"><i class="ti-key"></i> Password </a></li>
                     <li><a href="{{ route('admin.category.page') }}"><i class="ti-server"></i> Category</a></li>
-                    <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a></li>
-                    <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a></li>
+                    <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a>
+                    </li>
                     <li class="label">Features</li>
+                    <li><a href=""><i class="ti-heart"></i>Wishlist</a></li>
                     <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
                                 class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
@@ -308,10 +314,11 @@
                                 <span class="user-avatar mt-2">{{ Auth::user()->name }}
                                 </span>
                                 <span class="ml-3">
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <button class="btn btn-secondary" type="submit" title="Logout"><i class="ti-key"></i></button>
-                                        </form>
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button class="btn btn-secondary" type="submit" title="Logout"><i
+                                                class="ti-key"></i></button>
+                                    </form>
                                 </span>
                             </div>
                         </div>
@@ -321,32 +328,34 @@
         </div>
     </div>
 
-<div class="content-wrap">
-    <div class="main">
-        <div class="container-fluid">
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
 
-            <!-- /# row -->
-            <section id="main-content">
-                @yield('content')
-                
-            </section>
+                <!-- /# row -->
+                <section id="main-content">
+                    @yield('content')
+
+                </section>
+            </div>
         </div>
     </div>
-</div>
 
 
-@yield('scripts')
-{{--logout --}}
-<script>
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
+    @yield('scripts')
+    {{-- logout --}}
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
 
-    myModal.addEventListener('shown.bs.modal', function () {
-    myInput.focus()
-    })
-</script>
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInput.focus()
+        })
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
 
     <!-- jquery vendor -->
     <script src="{{ asset('home/admin/js/lib/jquery.min.js') }}"></script>

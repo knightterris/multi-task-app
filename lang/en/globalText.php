@@ -102,6 +102,8 @@ return[
         'no_cover_image'=>'There is no cover image for your product.',
         'no_images'=>'There are no images for your product.',
         'no_product'=>'There are no products.',
+        'wishlist'=>'WishList',
+        'remove_wishlist'=>'Remove From Wishlist'
     ],
 
 ];
