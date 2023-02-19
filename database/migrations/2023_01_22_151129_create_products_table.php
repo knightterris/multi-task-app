@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger('count');
             $table->integer('status');
             $table->string('created_by');
+            $table->string('created_by_id');
             $table->string('product_type');
             $table->bigInteger('like')->default(0);
             $table->integer('wishlist_status')->default(0);

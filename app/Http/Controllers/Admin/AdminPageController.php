@@ -64,7 +64,10 @@ class AdminPageController extends Controller
         return view('admin.product.edit',compact('data','images','itemCategory','foodCategory'));
     }
     public function showProductPage($id){
-        $data = Product::where('id',$id)->first();
+        $data = DB::table('products')
+                    ->join('users','products.created_by_id','users.id')
+                    ->select('products.*', 'users.phone as creator_phone','users.email as creator_email','users.name as creator_name')
+                    ->where('products.id',$id)->first();
         $images = Image::where('product_id',$id)->get();
         $itemCategory = ItemCategory::where('id',$data->category_id)->first();
         $foodCategory = FoodCategory::where('id',$data->category_id)->first();

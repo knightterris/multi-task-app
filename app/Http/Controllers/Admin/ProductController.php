@@ -109,6 +109,7 @@ class ProductController extends Controller
             'count'=>$request->product_count,
             'status'=>$request->product_status,
             'created_by'=>Auth::user()->name,
+            'created_by_id'=>Auth::user()->id,
             'product_type'=>$request->product_type,
         ];
     }

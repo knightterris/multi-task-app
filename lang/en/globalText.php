@@ -106,6 +106,10 @@ return[
         'remove_wishlist'=>'Remove From Wishlist',
         'my_wishList'=>'My Wishlist',
         'no_wishlist'=>'There is no item in your wishlist.',
+        'contact'=>'Contact with the creator',
+        'creator_name'=>'Name',
+        'creator_email'=>'Email',
+        'creator_phone'=>'Phone',
     ],
 
 ];
