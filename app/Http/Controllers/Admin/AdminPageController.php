@@ -71,7 +71,6 @@ class AdminPageController extends Controller
         return view('admin.product.show',compact('data','images','itemCategory','foodCategory'));
     }
     public function wishListPage(){
-        // $data = MyWishList::where('user_id',Auth::user()->id)->get();
         $data = DB::table('my_wish_lists')
                     ->join('products','my_wish_lists.product_id','products.id')
                     ->where('my_wish_lists.user_id',Auth::user()->id)->get();
