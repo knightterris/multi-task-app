@@ -103,7 +103,9 @@ return[
         'no_images'=>'There are no images for your product.',
         'no_product'=>'There are no products.',
         'wishlist'=>'WishList',
-        'remove_wishlist'=>'Remove From Wishlist'
+        'remove_wishlist'=>'Remove From Wishlist',
+        'my_wishList'=>'My Wishlist',
+        'no_wishlist'=>'There is no item in your wishlist.',
     ],
 
 ];

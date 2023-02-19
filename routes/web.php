@@ -68,6 +68,9 @@ Route::prefix('admin')->group(function () {
         Route::post('product/create/wishList',[ProductController::class,'addWishList'])->name('admin.product.addWishList');
         Route::get('product/delete/wishlist/{id}',[ProductController::class,'removeWishlist'])->name('admin.product.removeWishList');
     });
+    Route::prefix('myWishList')->group(function(){
+        Route::get('wishlist/page',[AdminPageController::class,'wishListPage'])->name('admin.wishlist.wishlistPage');
+    });
 });
 Route::prefix('user')->group(function () {
     Route::get('homePage',[UserPageController::class,'homePage'])->name('user.homepage');

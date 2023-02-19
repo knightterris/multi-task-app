@@ -5,6 +5,10 @@
         .ti-heart {
             cursor: pointer;
         }
+
+        .colored-toast.swal2-icon-success {
+            background-color: #a5dc86 !important;
+        }
     </style>
 @endsection
 @section('content')

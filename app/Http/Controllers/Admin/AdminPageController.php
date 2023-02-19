@@ -8,7 +8,9 @@ use App\Models\MyWishList;
 use App\Models\FoodCategory;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPageController extends Controller
 {
@@ -67,5 +69,12 @@ class AdminPageController extends Controller
         $itemCategory = ItemCategory::where('id',$data->category_id)->first();
         $foodCategory = FoodCategory::where('id',$data->category_id)->first();
         return view('admin.product.show',compact('data','images','itemCategory','foodCategory'));
+    }
+    public function wishListPage(){
+        // $data = MyWishList::where('user_id',Auth::user()->id)->get();
+        $data = DB::table('my_wish_lists')
+                    ->join('products','my_wish_lists.product_id','products.id')
+                    ->where('my_wish_lists.user_id',Auth::user()->id)->get();
+        return view('admin.wishlist.index',compact('data'));
     }
 }

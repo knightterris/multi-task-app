@@ -72,7 +72,7 @@
                     <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a>
                     </li>
                     <li class="label">Features</li>
-                    <li><a href=""><i class="ti-heart"></i>Wishlist</a></li>
+                    <li><a href="{{ route('admin.wishlist.wishlistPage') }}"><i class="ti-heart"></i>Wishlist</a></li>
                     <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
                                 class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
