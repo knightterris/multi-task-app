@@ -18,6 +18,7 @@ class Product extends Model
         'status',
         'created_by',
         'created_by_id',
+        'liked_by_id',
         'product_type',
         'like',
         'wishlist_status'

@@ -89,6 +89,15 @@ class ProductController extends Controller
         Product::where('id',$id)->update($data);
         return back()->with(['remove_success'=>'You have removed an item from your wishlist.']);
     }
+    public function addLike(Request $request){
+        $product = Product::where('id',$request->each_id)->first();
+        $data = [
+            'liked_by_id'=>Auth::user()->id,
+            'like'=>$product->like + 1
+        ];
+        Product::where('id',$request->each_id)->update($data);
+        return"You liked this item";
+    }
 
     private function foodValidation($request){
         Validator::make($request->all(),[

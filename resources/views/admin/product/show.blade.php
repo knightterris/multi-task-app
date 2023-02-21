@@ -35,11 +35,13 @@
                                             @if ($data->image)
                                                 <a href="{{ asset('storage/product_images/' . $data->image) }}">
                                                     <img src="{{ asset('storage/product_images/' . $data->image) }}"
-                                                        class="img-fluid img-thumbnail" style="width:100%; height:300px;">
+                                                        class="img-fluid img-thumbnail"
+                                                        style="width:100%; height:300px; object-fit:cover;">
                                                 </a>
                                             @else
                                                 <img src="{{ asset('home/admin/no-image.png') }}"
-                                                    class="img-fluid img-thumbnail" style="width:500px; height:300px;">
+                                                    class="img-fluid img-thumbnail"
+                                                    style="width:500px; height:300px; object-fit:cover;">
                                             @endif
                                         </div>
                                     </div>
@@ -167,7 +169,7 @@
                                                     <a href="{{ asset('storage/product_images/' . $item->image) }}">
                                                         <img src="{{ asset('storage/product_images/' . $item->image) }}"
                                                             class="img-fluid img-thumbnail"
-                                                            style="width:100%; height:300px;">
+                                                            style="width:100%; height:300px; object-fit:cover;">
                                                     </a>
                                                 </div>
                                             </div>

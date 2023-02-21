@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('status');
             $table->string('created_by');
             $table->string('created_by_id');
+            $table->string('liked_by_id')->nullable();
             $table->string('product_type');
             $table->bigInteger('like')->default(0);
             $table->integer('wishlist_status')->default(0);
