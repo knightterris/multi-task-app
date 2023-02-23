@@ -18,10 +18,10 @@ class Product extends Model
         'status',
         'created_by',
         'created_by_id',
-        'liked_by_id',
         'product_type',
         'like',
-        'wishlist_status'
+        'wishlist_status',
+        'like_status'
     ];
     //status=> 0 -> instock, 1 -> outofStock
 }

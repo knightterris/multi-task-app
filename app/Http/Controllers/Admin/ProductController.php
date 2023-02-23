@@ -92,11 +92,20 @@ class ProductController extends Controller
     public function addLike(Request $request){
         $product = Product::where('id',$request->each_id)->first();
         $data = [
-            'liked_by_id'=>Auth::user()->id,
-            'like'=>$product->like + 1
+            'like'=>$product->like + 1,
+            'like_status'=>'liked',
         ];
         Product::where('id',$request->each_id)->update($data);
-        return"You liked this item";
+        return"Liked";
+    }
+    public function dislike(Request $request){
+        $product = Product::where('id',$request->each_id)->first();
+        $data = [
+            'like'=>$product->like - 1,
+            'like_status'=>'unliked',
+        ];
+        Product::where('id',$request->each_id)->update($data);
+        return"Unliked";
     }
 
     private function foodValidation($request){

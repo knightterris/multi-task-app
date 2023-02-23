@@ -75,8 +75,13 @@
                     <div class="card-footer mb-3">
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
-                                <i class="ti-heart me-2 like-icon" data-id="{{ $item->id }}"></i>
-                                <span class="">{{ $item->like }} Likes</span>
+                                @if ($item->like_status == 'liked')
+                                    <i class="fa-solid fa-heart me-2" id="unlike-icon" data-id="{{ $item->id }}"></i>
+                                @else
+                                    <i class="ti-heart me-2" id="like-icon" data-id="{{ $item->id }}"></i>
+                                @endif
+                                <span class="" id="likeCountShow">{{ $item->like }} Likes</span>
+                                <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
                                 <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                         title="See Details"></i></a>
                             </div>
@@ -160,16 +165,56 @@
                         icon: 'success',
                         title: data
                     }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload();
+                        var likeCountVal = $('#likeCountVal').val();
+                        if (data == "Liked") {
+                            $('#likeCountVal').val(parseInt(likeCountVal) + 1);
+                            $('#likeCountShow').html(parseInt(likeCountVal) + 1 + ' Likes');
+                            $('#like-icon').replaceWith(
+                                `<i class="fa-solid fa-heart me-2"></i>`
+                            );
                         }
                     });
                 }
             });
         })
+        $(document).on('click', '.fa-heart', function() {
+            var eachId = $(this).attr('data-id');
 
-        //firstly we need to add like_by_id in the product model. // remove like_by_id column from product table , create a new table containing user id and product id and like count.
-        //get each post id and update it in the controller.
-        //if auth::user()->id == product->like_by_id => likes minus 1
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.product.dislike') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    each_id: eachId,
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-right',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast'
+                        },
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: data
+                    }).then((result) => {
+                        var likeCountVal = $('#likeCountVal').val();
+                        if (data == "Unliked") {
+                            $('#likeCountVal').val(parseInt(likeCountVal) - 1);
+                            $('#likeCountShow').html(parseInt(likeCountVal) - 1 + ' Likes');
+                            $('#unlike-icon').replaceWith(
+                                `<i class="ti-heart me-2"></i>`
+                            );
+                        }
+                    });
+                }
+            });
+        })
     </script>
 @endsection
