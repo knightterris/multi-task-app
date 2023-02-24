@@ -75,8 +75,7 @@
                     <div class="card-footer mb-3">
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
-                                <input type="hidden" name="item_id" id="item_id{{ $item->id }}"
-                                    value="{{ $item->id }}">
+                                <input type="hidden" name="item_id" id="item_id" value="{{ $item->id }}">
                                 @if ($item->like_status == 'liked')
                                     <i class="fa-solid fa-heart me-2" id="unlike-icon"></i>
                                 @else
@@ -142,7 +141,7 @@
 
         })
         $(document).on('click', '.ti-heart', function() {
-            var eachId = $('#item_id{{ $item->id }}').val();
+            var eachId = $('#item_id').val();
             $.ajax({
                 type: "POST",
                 url: "{{ route('admin.product.addLike') }}",
@@ -180,7 +179,7 @@
             });
         })
         $(document).on('click', '.fa-heart', function() {
-            var eachId = $('#item_id{{ $item->id }}').val();
+            var eachId = $('#item_id').val();
 
             $.ajax({
                 type: "POST",
