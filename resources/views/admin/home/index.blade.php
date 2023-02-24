@@ -75,27 +75,30 @@
                     <div class="card-footer mb-3">
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
+                                <input type="hidden" name="item_id" id="item_id{{ $item->id }}"
+                                    value="{{ $item->id }}">
                                 @if ($item->like_status == 'liked')
-                                    <i class="fa-solid fa-heart me-2" id="unlike-icon" data-id="{{ $item->id }}"></i>
+                                    <i class="fa-solid fa-heart me-2" id="unlike-icon"></i>
                                 @else
-                                    <i class="ti-heart me-2" id="like-icon" data-id="{{ $item->id }}"></i>
+                                    <i class="ti-heart me-2" id="like-icon"></i>
                                 @endif
-                                <span class="" id="likeCountShow">{{ $item->like }} Likes</span>
+                                <span class="me-5" id="likeCountShow">{{ $item->like }} Likes</span>
+
+                                <a href=""><i class="fa-regular fa-comments text-dark me-3"></i></a>
                                 <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
                                 <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                         title="See Details"></i></a>
                             </div>
                             <div class="">
                                 @if ($item->wishlist_status == 0)
-                                    <button class="btn btn-primary wishlist" data-id="{{ $item->id }}">
-                                        <i class="ti-download"></i>
-                                        {{ trans('globalText.product.wishlist') }}
+                                    <button class="btn btn-primary wishlist" data-id="{{ $item->id }}"
+                                        title="Add to Wishlist">
+                                        <i class="fa-regular fa-bookmark"></i>
                                     </button>
                                 @else
                                     <a href="{{ route('admin.product.removeWishList', $item->id) }}">
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger" title="Remove From Wishlist">
                                             <i class="ti-trash"></i>
-                                            {{ trans('globalText.product.remove_wishlist') }}
                                         </button>
                                     </a>
                                 @endif
@@ -139,8 +142,7 @@
 
         })
         $(document).on('click', '.ti-heart', function() {
-            var eachId = $(this).attr('data-id');
-
+            var eachId = $('#item_id{{ $item->id }}').val();
             $.ajax({
                 type: "POST",
                 url: "{{ route('admin.product.addLike') }}",
@@ -170,15 +172,15 @@
                             $('#likeCountVal').val(parseInt(likeCountVal) + 1);
                             $('#likeCountShow').html(parseInt(likeCountVal) + 1 + ' Likes');
                             $('#like-icon').replaceWith(
-                                `<i class="fa-solid fa-heart me-2"></i>`
-                            );
+                                `<i class="fa-solid fa-heart me-2" id="unlike-icon"></i>`
+                            )
                         }
                     });
                 }
             });
         })
         $(document).on('click', '.fa-heart', function() {
-            var eachId = $(this).attr('data-id');
+            var eachId = $('#item_id{{ $item->id }}').val();
 
             $.ajax({
                 type: "POST",
@@ -209,8 +211,8 @@
                             $('#likeCountVal').val(parseInt(likeCountVal) - 1);
                             $('#likeCountShow').html(parseInt(likeCountVal) - 1 + ' Likes');
                             $('#unlike-icon').replaceWith(
-                                `<i class="ti-heart me-2"></i>`
-                            );
+                                `<i class="ti-heart me-2" id="like-icon"></i>`
+                            )
                         }
                     });
                 }
