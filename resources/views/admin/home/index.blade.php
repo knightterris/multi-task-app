@@ -75,16 +75,17 @@
                     <div class="card-footer mb-3">
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
-                                <input type="hidden" name="item_id" id="item_id" value="{{ $item->id }}">
+
                                 @if ($item->like_status == 'liked')
                                     <i class="fa-solid fa-heart me-2" id="unlike-icon"></i>
                                 @else
+                                    <input type="hidden" name="item_id" id="item_id" value="{{ $item->id }}">
                                     <i class="ti-heart me-2" id="like-icon"></i>
                                 @endif
+                                <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
                                 <span class="me-5" id="likeCountShow">{{ $item->like }} Likes</span>
 
                                 <a href=""><i class="fa-regular fa-comments text-dark me-3"></i></a>
-                                <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
                                 <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                         title="See Details"></i></a>
                             </div>
