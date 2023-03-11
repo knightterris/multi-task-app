@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -23,5 +24,7 @@ class Product extends Model
         'wishlist_status',
         'like_status'
     ];
-    //status=> 0 -> instock, 1 -> outofStock
+        // public function comments(){
+        //     return $this->hasMany(Comment::class);
+        // }
 }

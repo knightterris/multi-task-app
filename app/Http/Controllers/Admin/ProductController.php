@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Storage;
 use App\Models\Image;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\MyWishList;
 use Illuminate\Http\Request;
@@ -106,6 +107,15 @@ class ProductController extends Controller
         ];
         Product::where('id',$request->each_id)->update($data);
         return"Unliked";
+    }
+    public function addComment(Request $request){
+        $data = [
+            'user_id'=>Auth::user()->id,
+            'product_id'=>$request->product_id,
+            'message'=>$request->message
+        ];
+        Comment::create($data);
+        return"You added a comment";
     }
 
     private function foodValidation($request){

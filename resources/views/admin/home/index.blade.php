@@ -73,9 +73,8 @@
                         </div>
                     </div>
                     <div class="card-footer mb-3">
-                        <div class="d-flex justify-content-between">
-                            <div class="mt-2">
-
+                        <div class="row">
+                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 @if ($item->like_status == 'liked')
                                     <i class="fa-solid fa-heart me-2" id="unlike-icon"></i>
                                 @else
@@ -84,12 +83,19 @@
                                 @endif
                                 <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
                                 <span class="me-5" id="likeCountShow">{{ $item->like }} Likes</span>
+                            </div> --}}
 
-                                <a href=""><i class="fa-regular fa-comments text-dark me-3"></i></a>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+                                <a href="{{ route('admin.product.commentList', $item->id) }}"><i
+                                        class="fa-regular fa-comments text-dark me-3"></i></a>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                         title="See Details"></i></a>
                             </div>
-                            <div class="">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 @if ($item->wishlist_status == 0)
                                     <button class="btn btn-primary wishlist" data-id="{{ $item->id }}"
                                         title="Add to Wishlist">
@@ -104,6 +110,7 @@
                                 @endif
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -141,82 +148,82 @@
             });
 
         })
-        $(document).on('click', '.ti-heart', function() {
-            var eachId = $('#item_id').val();
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin.product.addLike') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    each_id: eachId,
-                },
-                success: function(data) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-right',
-                        iconColor: 'white',
-                        customClass: {
-                            popup: 'colored-toast'
-                        },
-                        showConfirmButton: false,
-                        timer: 1000,
-                    })
-                    Toast.fire({
-                        icon: 'success',
-                        title: data
-                    }).then((result) => {
-                        var likeCountVal = $('#likeCountVal').val();
-                        if (data == "Liked") {
-                            $('#likeCountVal').val(parseInt(likeCountVal) + 1);
-                            $('#likeCountShow').html(parseInt(likeCountVal) + 1 + ' Likes');
-                            $('#like-icon').replaceWith(
-                                `<i class="fa-solid fa-heart me-2" id="unlike-icon"></i>`
-                            )
-                        }
-                    });
-                }
-            });
-        })
-        $(document).on('click', '.fa-heart', function() {
-            var eachId = $('#item_id').val();
+        // $(document).on('click', '.ti-heart', function() {
+        //     var eachId = $('#item_id').val();
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ route('admin.product.addLike') }}",
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         data: {
+        //             each_id: eachId,
+        //         },
+        //         success: function(data) {
+        //             const Toast = Swal.mixin({
+        //                 toast: true,
+        //                 position: 'top-right',
+        //                 iconColor: 'white',
+        //                 customClass: {
+        //                     popup: 'colored-toast'
+        //                 },
+        //                 showConfirmButton: false,
+        //                 timer: 1000,
+        //             })
+        //             Toast.fire({
+        //                 icon: 'success',
+        //                 title: data
+        //             }).then((result) => {
+        //                 var likeCountVal = $('#likeCountVal').val();
+        //                 if (data == "Liked") {
+        //                     $('#likeCountVal').val(parseInt(likeCountVal) + 1);
+        //                     $('#likeCountShow').html(parseInt(likeCountVal) + 1 + ' Likes');
+        //                     $('#like-icon').replaceWith(
+        //                         `<i class="fa-solid fa-heart me-2" id="unlike-icon"></i>`
+        //                     )
+        //                 }
+        //             });
+        //         }
+        //     });
+        // })
+        // $(document).on('click', '.fa-heart', function() {
+        //     var eachId = $('#item_id').val();
 
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin.product.dislike') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    each_id: eachId,
-                },
-                success: function(data) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-right',
-                        iconColor: 'white',
-                        customClass: {
-                            popup: 'colored-toast'
-                        },
-                        showConfirmButton: false,
-                        timer: 1000,
-                    })
-                    Toast.fire({
-                        icon: 'success',
-                        title: data
-                    }).then((result) => {
-                        var likeCountVal = $('#likeCountVal').val();
-                        if (data == "Unliked") {
-                            $('#likeCountVal').val(parseInt(likeCountVal) - 1);
-                            $('#likeCountShow').html(parseInt(likeCountVal) - 1 + ' Likes');
-                            $('#unlike-icon').replaceWith(
-                                `<i class="ti-heart me-2" id="like-icon"></i>`
-                            )
-                        }
-                    });
-                }
-            });
-        })
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ route('admin.product.dislike') }}",
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         data: {
+        //             each_id: eachId,
+        //         },
+        //         success: function(data) {
+        //             const Toast = Swal.mixin({
+        //                 toast: true,
+        //                 position: 'top-right',
+        //                 iconColor: 'white',
+        //                 customClass: {
+        //                     popup: 'colored-toast'
+        //                 },
+        //                 showConfirmButton: false,
+        //                 timer: 1000,
+        //             })
+        //             Toast.fire({
+        //                 icon: 'success',
+        //                 title: data
+        //             }).then((result) => {
+        //                 var likeCountVal = $('#likeCountVal').val();
+        //                 if (data == "Unliked") {
+        //                     $('#likeCountVal').val(parseInt(likeCountVal) - 1);
+        //                     $('#likeCountShow').html(parseInt(likeCountVal) - 1 + ' Likes');
+        //                     $('#unlike-icon').replaceWith(
+        //                         `<i class="ti-heart me-2" id="like-icon"></i>`
+        //                     )
+        //                 }
+        //             });
+        //         }
+        //     });
+        // })
     </script>
 @endsection

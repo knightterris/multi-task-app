@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Image;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\MyWishList;
 use App\Models\FoodCategory;
@@ -78,5 +79,12 @@ class AdminPageController extends Controller
                     ->join('products','my_wish_lists.product_id','products.id')
                     ->where('my_wish_lists.user_id',Auth::user()->id)->get();
         return view('admin.wishlist.index',compact('data'));
+    }
+    public function commentList($id){
+        $data = Product::leftJoin('users','products.created_by_id','users.id')
+                        ->select('products.*','users.name as user_name','users.photo as user_photo')
+                        ->where('products.id',$id)->first();
+        $comments = Comment::where('product_id',$id)->get();
+        return view('admin.comments.index',compact('data','comments'));
     }
 }

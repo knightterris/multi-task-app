@@ -8,9 +8,6 @@
         </div>
     @endif
     <div class="row">
-        <div class="card">
-            <div class="text-center p-3 fs-4">{{ trans('globalText.product.my_wishList') }}</div>
-        </div>
         @if (count($data) != 0)
             @foreach ($data as $item)
                 <div class="col-4">

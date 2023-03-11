@@ -313,6 +313,8 @@
                             <div class="header-icon d-flex" data-toggle="dropdown">
                                 <span class="user-avatar mt-2">{{ Auth::user()->name }}
                                 </span>
+                                {{-- <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt=""
+                                    srcset="" class="rounded-circle"> --}}
                                 <span class="ml-3">
                                     <form action="{{ route('logout') }}" method="post">
                                         @csrf
