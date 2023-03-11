@@ -25,7 +25,7 @@
     <div class="row">
         @foreach ($data as $item)
             <div class="col-4">
-                <div class="card p-3" style="height:800px;">
+                <div class="card p-3" style="height:850px;">
                     <div class="card-header text-center">{{ $item->name }}</div>
                     {{-- <div class="card-body"> --}}
                     <div class="my-3">
@@ -43,6 +43,14 @@
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Created By</h6>
                             <span>{{ $item->created_by }}</span>
+                        </div>
+                        <div class="my-3 d-flex justify-content-between">
+                            <h6>Created At</h6>
+                            <span>{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
+                        </div>
+                        <div class="my-3 d-flex justify-content-between">
+                            <h6>Updated At</h6>
+                            <span>{{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}</span>
                         </div>
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Product Name</h6>
@@ -69,7 +77,7 @@
                         </div>
                         <div class="my-3 ">
                             <h6>Description</h6>
-                            <span>{{ Str::limit($item->description, 200) }}</span>
+                            <span>{{ Str::limit($item->description, 100) }}</span>
                         </div>
                     </div>
                     <div class="card-footer mb-3">
