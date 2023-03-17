@@ -10,7 +10,7 @@
             margin-top: 10px !important;
         }
         .cmtCard{
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.8);
         }
     </style>
 @endsection
@@ -25,8 +25,13 @@
                     @foreach ($comments as $comment)
                         <div class="row cmtCard my-3 rounded">
                             <div class="col-lg-1 col-md-3 col-sm-6 col-12">
-                                <img src="{{ asset('storage/'.$data->user_photo) }}" alt="" srcset=""
-                                    class="w-100 rounded-circle bg-primary">
+                                @if ($data->user_photo == NULL)
+                                    <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
+                                    class="w-100 rounded-circle bg-secondary">
+                                @else
+                                    <img src="{{ asset('storage/'.$data->user_photo) }}" alt="" srcset=""
+                                    class="w-100 rounded-circle">
+                                @endif
                             </div>
                             <div class="col-lg-11 col-md-6 col-sm-6 col-12">
                                 <div class="d-flex">

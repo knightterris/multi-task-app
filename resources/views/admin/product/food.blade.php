@@ -65,8 +65,11 @@
                         <label for="product_type" class="form-lable my-3">{{ trans('globalText.product.type') }}</label>
                         <select name="product_type" id="product_type" class="form-control">
                             <option value="">{{ trans('globalText.product.choose') }}</option>
+                            @if(url()->current() == route('admin.product.createFoodPage') )
                             <option value="0">Food</option>
+                            @elseif(url()->current() == route('admin.product.createItemPage') )
                             <option value="1">Item</option>
+                            @endif
                         </select>
 
                         <div class="card-footer mt-3">

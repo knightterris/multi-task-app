@@ -68,10 +68,12 @@
                     </li>
 
                     <li><a href="{{ route('admin.changePasswordPage') }}"><i class="ti-key"></i> Password </a></li>
-                    <li><a href="{{ route('admin.category.page') }}"><i class="ti-server"></i> Category</a></li>
-                    <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a>
+                    <li><a href="{{ route('admin.myWall.index') }}"><i class="ti-user"></i> My Wall </a></li>
+
                     </li>
                     <li class="label">Features</li>
+                    <li><a href="{{ route('admin.category.page') }}"><i class="ti-server"></i> Category</a></li>
+                    <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a>
                     <li><a href="{{ route('admin.wishlist.wishlistPage') }}"><i class="ti-heart"></i>Wishlist</a></li>
                     <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
                                 class="sidebar-collapse-icon ti-angle-down"></span></a>

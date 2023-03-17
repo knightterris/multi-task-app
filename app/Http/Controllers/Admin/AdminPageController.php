@@ -87,4 +87,11 @@ class AdminPageController extends Controller
         $comments = Comment::where('product_id',$id)->get();
         return view('admin.comments.index',compact('data','comments'));
     }
+    public function myWall(){
+        // $data = Product::where('created_by_id',Auth::user()->id)->get();
+        return view('admin.myWall.index');
+    }
+    public function followersList(){
+        return view('admin.myWall.Follower');
+    }
 }
