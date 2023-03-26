@@ -97,7 +97,9 @@ class ProductController extends Controller
             'like_status'=>'liked',
         ];
         Product::where('id',$request->each_id)->update($data);
-        return"Liked";
+
+        $data['id'] = Product::where('id',$request->each_id)->pluck('id');
+        return response()->json($data, 200);
     }
     public function dislike(Request $request){
         $product = Product::where('id',$request->each_id)->first();
@@ -106,7 +108,8 @@ class ProductController extends Controller
             'like_status'=>'unliked',
         ];
         Product::where('id',$request->each_id)->update($data);
-        return"Unliked";
+        $data['id'] = Product::where('id',$request->each_id)->pluck('id');
+        return response()->json($data, 200,['Unliked']);
     }
     public function addComment(Request $request){
         $data = [

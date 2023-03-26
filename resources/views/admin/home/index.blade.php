@@ -5,6 +5,9 @@
         .ti-heart {
             cursor: pointer;
         }
+        .fa-heart{
+            cursor: pointer;
+        }
 
         .colored-toast.swal2-icon-success {
             background-color: #a5dc86 !important;
@@ -76,22 +79,21 @@
 
                         </div>
                         <div class="my-3 ">
-                            <h6>Description</h6>
+                            <h6>Description {{ $item->id }}</h6>
                             <span>{{ Str::limit($item->description, 100) }}</span>
                         </div>
                     </div>
                     <div class="card-footer mb-3">
                         <div class="row">
-                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 @if ($item->like_status == 'liked')
-                                    <i class="fa-solid fa-heart me-2" id="unlike-icon"></i>
+                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon" data-id="{{ $item->id }}"></i>
                                 @else
-                                    <input type="hidden" name="item_id" id="item_id" value="{{ $item->id }}">
-                                    <i class="ti-heart me-2" id="like-icon"></i>
+                                    <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
                                 @endif
-                                <input type="hidden" id="likeCountVal" value="{{ $item->like }}">
-                                <span class="me-5" id="likeCountShow">{{ $item->like }} Likes</span>
-                            </div> --}}
+                                <input type="hidden" class="likeCountVal" id="likeCountVal" value="{{ $item->like }}">
+                                <span class="me-5 likeCountShow" id="likeCountShow">{{ $item->like }}</span>
+                            </div>
 
                             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 <a href="{{ route('admin.product.commentList', $item->id) }}"><i
@@ -145,6 +147,7 @@
                     product_id: productId,
                 },
                 success: function(data) {
+
                     Swal.fire({
                         icon: 'success',
                         title: data,
@@ -156,82 +159,83 @@
             });
 
         })
-        // $(document).on('click', '.ti-heart', function() {
-        //     var eachId = $('#item_id').val();
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "{{ route('admin.product.addLike') }}",
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         data: {
-        //             each_id: eachId,
-        //         },
-        //         success: function(data) {
-        //             const Toast = Swal.mixin({
-        //                 toast: true,
-        //                 position: 'top-right',
-        //                 iconColor: 'white',
-        //                 customClass: {
-        //                     popup: 'colored-toast'
-        //                 },
-        //                 showConfirmButton: false,
-        //                 timer: 1000,
-        //             })
-        //             Toast.fire({
-        //                 icon: 'success',
-        //                 title: data
-        //             }).then((result) => {
-        //                 var likeCountVal = $('#likeCountVal').val();
-        //                 if (data == "Liked") {
-        //                     $('#likeCountVal').val(parseInt(likeCountVal) + 1);
-        //                     $('#likeCountShow').html(parseInt(likeCountVal) + 1 + ' Likes');
-        //                     $('#like-icon').replaceWith(
-        //                         `<i class="fa-solid fa-heart me-2" id="unlike-icon"></i>`
-        //                     )
-        //                 }
-        //             });
-        //         }
-        //     });
-        // })
-        // $(document).on('click', '.fa-heart', function() {
-        //     var eachId = $('#item_id').val();
-
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "{{ route('admin.product.dislike') }}",
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         data: {
-        //             each_id: eachId,
-        //         },
-        //         success: function(data) {
-        //             const Toast = Swal.mixin({
-        //                 toast: true,
-        //                 position: 'top-right',
-        //                 iconColor: 'white',
-        //                 customClass: {
-        //                     popup: 'colored-toast'
-        //                 },
-        //                 showConfirmButton: false,
-        //                 timer: 1000,
-        //             })
-        //             Toast.fire({
-        //                 icon: 'success',
-        //                 title: data
-        //             }).then((result) => {
-        //                 var likeCountVal = $('#likeCountVal').val();
-        //                 if (data == "Unliked") {
-        //                     $('#likeCountVal').val(parseInt(likeCountVal) - 1);
-        //                     $('#likeCountShow').html(parseInt(likeCountVal) - 1 + ' Likes');
-        //                     $('#unlike-icon').replaceWith(
-        //                         `<i class="ti-heart me-2" id="like-icon"></i>`
-        //                     )
-        //                 }
-        //             });
-        //         }
-        //     });
-        // })
+        $(document).on('click', '.ti-heart', function() {
+            var eachId = $(this).data('id');
+            var likeCountVal = $(this).siblings('.likeCountVal').val();
+            var likeCountShow = $(this).siblings('.likeCountShow');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.product.addLike') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    each_id: eachId,
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-right',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast'
+                        },
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Liked',
+                    }).then((result) => {
+                        if (data.like_status == "liked") {
+                            finalLikeCount = parseInt(likeCountVal) + 1;
+                            likeCountShow.html(finalLikeCount);
+                            $(this).replaceWith(
+                                `<i class="fa-solid fa-heart me-2 unlike-icon" data-id="${data.id[0]}"></i>`
+                            )
+                        }
+                    });
+                }.bind(this)
+            });
+        })
+        $(document).on('click', '.fa-heart', function() {
+            var eachId = $(this).data('id');
+            var likeCountVal = $(this).siblings('.likeCountVal').val();
+            var likeCountShow = $(this).siblings('.likeCountShow');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.product.dislike') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    each_id: eachId,
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-right',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast'
+                        },
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Unliked',
+                    }).then((result) => {
+                        if (data.like_status == "unliked") {
+                            finalLikeCount = parseInt(likeCountVal) - 1;
+                            likeCountShow.html(finalLikeCount);
+                            $(this).replaceWith(
+                                `<i class="ti-heart me-2 like-icon" id="like-icon" data-id="${data.id[0]}"></i>`
+                            )
+                        }
+                    });
+                }.bind(this)
+            });
+        })
     </script>
 @endsection
