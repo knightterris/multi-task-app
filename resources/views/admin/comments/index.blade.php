@@ -10,7 +10,7 @@
             margin-top: 10px !important;
         }
         .cmtCard{
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
         }
     </style>
 @endsection

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('created_by_id');
             $table->string('product_type');
             $table->bigInteger('like')->default(0);
+            $table->bigInteger('comment')->default(0);
             $table->integer('wishlist_status')->default(0);
             $table->string('like_status')->default('unliked');
             $table->timestamps();

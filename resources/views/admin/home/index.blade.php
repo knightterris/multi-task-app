@@ -95,7 +95,7 @@
 
                             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 <a href="{{ route('admin.product.commentList', $item->id) }}"><i
-                                        class="fa-regular fa-comments text-dark me-3"></i></a>
+                                        class="fa-regular fa-comments text-dark me-3"></i>{{ $item->comment }}</a>
                             </div>
 
                             <div class="col-lg-3 col-md-3 col-sm-3 col-12">

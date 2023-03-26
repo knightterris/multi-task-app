@@ -114,7 +114,12 @@ class ProductController extends Controller
             'product_id'=>$request->product_id,
             'message'=>$request->message
         ];
+        $product = Product::where('id',$request->product_id)->first();
+        $cmt = [
+            'comment'=>$product->comment + 1
+        ];
         Comment::create($data);
+        Product::where('id',$request->product_id)->update($cmt);
         return"You added a comment";
     }
 

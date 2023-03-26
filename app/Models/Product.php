@@ -21,6 +21,7 @@ class Product extends Model
         'created_by_id',
         'product_type',
         'like',
+        'comment',
         'wishlist_status',
         'like_status'
     ];
