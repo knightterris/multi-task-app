@@ -5,7 +5,8 @@
         .ti-heart {
             cursor: pointer;
         }
-        .fa-heart{
+
+        .fa-heart {
             cursor: pointer;
         }
 
@@ -34,11 +35,11 @@
                     <div class="my-3">
                         @if ($item->image)
                             <a href="{{ asset('storage/product_images/' . $item->image) }} "><img
-                                    src="{{ asset('storage/product_images/' . $item->image) }}"
-                                    class="img-fluid img-thumbnail" style="width:500px; height:300px;"></a>
+                                    src="{{ asset('storage/product_images/' . $item->image) }}" class="img-fluid"
+                                    style="width:500px; height:300px; object-fit: contain;"></a>
                         @else
-                            <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid img-thumbnail"
-                                style="width:500px; height:300px;">
+                            <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid"
+                                style="width:500px; height:300px; object-fit: contain;">
                         @endif
                     </div>
                     {{-- </div> --}}
@@ -87,7 +88,8 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 @if ($item->like_status == 'liked')
-                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon" data-id="{{ $item->id }}"></i>
+                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
+                                        data-id="{{ $item->id }}"></i>
                                 @else
                                     <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
                                 @endif
@@ -105,20 +107,7 @@
                                         title="See Details"></i></a>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                                @if ($item->wishlist_status == 0)
-                                    <button class="btn btn-primary wishlist" data-id="{{ $item->id }}"
-                                        title="Add to Wishlist">
-                                        <i class="fa-regular fa-bookmark"></i>
-                                    </button>
-                                @else
-                                    <a href="{{ route('admin.product.removeWishList', $item->id) }}">
-                                        <button class="btn btn-danger" title="Remove From Wishlist">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </a>
-                                @endif
-                            </div>
+
                         </div>
 
                     </div>
@@ -188,7 +177,8 @@
                         title: 'Liked',
                     }).then((result) => {
                         if (data.like_status == "liked") {
-                            finalLikeCount = parseInt(likeCountVal) + 1;
+
+                            finalLikeCount = data.like;
                             likeCountShow.html(finalLikeCount);
                             $(this).replaceWith(
                                 `<i class="fa-solid fa-heart me-2 unlike-icon" data-id="${data.id[0]}"></i>`
@@ -227,7 +217,7 @@
                         title: 'Unliked',
                     }).then((result) => {
                         if (data.like_status == "unliked") {
-                            finalLikeCount = parseInt(likeCountVal) - 1;
+                            finalLikeCount = data.like;
                             likeCountShow.html(finalLikeCount);
                             $(this).replaceWith(
                                 `<i class="ti-heart me-2 like-icon" id="like-icon" data-id="${data.id[0]}"></i>`

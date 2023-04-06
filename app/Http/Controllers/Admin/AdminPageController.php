@@ -88,8 +88,9 @@ class AdminPageController extends Controller
         return view('admin.comments.index',compact('data','comments'));
     }
     public function myWall(){
-        // $data = Product::where('created_by_id',Auth::user()->id)->get();
-        return view('admin.myWall.index');
+        $postsCount = Product::where('created_by_id',Auth::user()->id)->count();
+        $data = Product::where('created_by_id',Auth::user()->id)->get();
+        return view('admin.myWall.index',compact('postsCount','data'));
     }
     public function followersList(){
         return view('admin.myWall.Follower');

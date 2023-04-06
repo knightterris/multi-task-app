@@ -67,9 +67,9 @@ h4 {
                                                     <th scope="row" class="text-dark">{{ $item->id }}</th>
                                                     <td class="w-25">
                                                         @if ($item->image)
-                                                            <img src="{{ asset('storage/product_images/'.$item->image) }}" class="img-fluid img-thumbnail" style="width:500px; height:300px;">
+                                                            <img src="{{ asset('storage/product_images/'.$item->image) }}" class="img-fluid" style="width:500px; height:300px; object-fit: contain;">
                                                         @else
-                                                        <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid img-thumbnail" style="width:500px; height:300px;">
+                                                            <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid" style="width:500px; height:300px; object-fit: contain;">
                                                         @endif
                                                     </td>
                                                     <td class="w-25 text-dark">{{ Str::limit($item->description, 200) }}</td>
