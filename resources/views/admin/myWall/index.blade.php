@@ -9,47 +9,43 @@
         .swal2-popup.swal2-toast .swal2-title {
             margin-top: 10px !important;
         }
+
+        .followerCard {
+            box-shadow: 0 0.25rem 0.5rem rgba(224, 224, 224, 0.8);
+        }
     </style>
 @endsection
 @section('content')
     <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-            {{-- @if ($data->user_photo == NULL) --}}
+            @if (Auth::user()->photo == null)
                 <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
-                class="w-100 rounded-circle bg-secondary">
-            {{-- @else --}}
-                {{-- <img src="{{ asset('storage/'.$data->user_photo) }}" alt="" srcset=""
-                class="w-100 rounded-circle">
-            @endif --}}
+                    class="w-100 rounded-circle bg-secondary">
+            @else
+                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="" srcset=""
+                    class="w-100 rounded-circle">
+            @endif
         </div>
-        {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <img src="{{ asset('home/images/product_02.jpg') }}" class="rounded-circle" alt="" srcset="" style="">
-        </div> --}}
+
         <div class="col-md-1"></div>
         <div class="col-md-3 col-sm-3 col-12">
             <h4 class="mt-5">{{ Auth::user()->name }}</h4>
 
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-12">
-                    <a href="" class="text-decoration-none">
-                        <div class="d-flex mt-3">
-                            <p class="me-2">{{ $postsCount }}</p> Posts
-                        </div>
-                    </a>
+                    <div class="d-flex mt-3">
+                        <p class="me-2">{{ $postsCount }}</p> Posts
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12">
-                    <a href="" class="text-decorationi-none">
-                        <div class="d-flex mt-3">
-                            <p class="me-2">3</p> Following
-                        </div>
-                    </a>
+                    <div class="d-flex mt-3">
+                        <p class="me-2" data-bs-toggle="modal" data-bs-target="#followingModal">3</p> Following
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12">
-                    <a href="{{ route('admin.myWall.Followers') }}" class="text-decoration-none">
-                        <div class="d-flex mt-3">
-                            <p class="me-2">999K</p> Followers
-                        </div>
-                    </a>
+                    <div class="d-flex mt-3">
+                        <p class="me-2" data-bs-toggle="modal" data-bs-target="#followerModal">999K</p> Followers
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,10 +87,97 @@
 
     </div>
 
-    <p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt delectus aliquam dolor error ea eos assumenda itaque, nihil repudiandae suscipit corrupti commodi optio ipsam pariatur odit, at accusantium culpa ut!
-    </p> <!--215 characters-->
+    <p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt delectus aliquam dolor error ea eos
+        assumenda itaque, nihil repudiandae suscipit corrupti commodi optio ipsam pariatur odit, at accusantium culpa ut!
+    </p>
+    <!--215 characters-->
+
+
+    <!-- Follower Modal -->
+    <div class="modal fade" id="followerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg p-3">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">People Who Follow You</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row followerCard rounded">
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-12">
+                            {{-- @if ($data->user_photo == null) --}}
+                            <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
+                                class="w-100 rounded-circle bg-secondary">
+                            {{-- @else
+                                        <img src="{{ asset('storage/'.$data->user_photo) }}" alt="" srcset=""
+                                        class="w-100 rounded-circle">
+                                    @endif --}}
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-6 col-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mt-2">Aung Kaung Myat</h5>
+                                    <span class="text-muted">Follows you</span>
+                                </div>
+                                <div class="col-md-1 offset-3">
+                                    <div class="d-flex">
+                                        <button class="btn btn-primary">Follow</button>
+                                        <button class="btn btn-dark">Followed</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Following Modal --}}
+    <div class="modal fade" id="followingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg p-3">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">People You Follow</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row followerCard rounded">
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-12">
+                            {{-- @if ($data->user_photo == null) --}}
+                            <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
+                                class="w-100 rounded-circle bg-secondary">
+                            {{-- @else
+                                    <img src="{{ asset('storage/'.$data->user_photo) }}" alt="" srcset=""
+                                    class="w-100 rounded-circle">
+                                @endif --}}
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-6 col-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mt-2">Jennie</h5>
+                                    <span class="text-muted">Follows you</span>
+                                </div>
+                                <div class="col-md-1 offset-3">
+                                    <div class="d-flex">
+                                        <button class="btn btn-primary">Follow</button>
+                                        <button class="btn btn-dark">Followed</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <hr>
 
+    {{-- My Products --}}
     <div class="container">
         @foreach ($data as $item)
             <div class="">
@@ -104,8 +187,8 @@
                     <div class="my-3 text-center">
                         @if ($item->image)
                             <a href="{{ asset('storage/product_images/' . $item->image) }} "><img
-                                    src="{{ asset('storage/product_images/' . $item->image) }}"
-                                    class="img-fluid" style="width:500px; height:300px; object-fit: contain;"></a>
+                                    src="{{ asset('storage/product_images/' . $item->image) }}" class="img-fluid"
+                                    style="width:500px; height:300px; object-fit: contain;"></a>
                         @else
                             <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid"
                                 style="width:500px; height:300px; object-fit: contain;">
@@ -120,10 +203,6 @@
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Created At</h6>
                             <span>{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
-                        </div>
-                        <div class="my-3 d-flex justify-content-between">
-                            <h6>Updated At</h6>
-                            <span>{{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}</span>
                         </div>
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Product Name</h6>
@@ -157,11 +236,13 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                 @if ($item->like_status == 'liked')
-                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon" data-id="{{ $item->id }}"></i>
+                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
+                                        data-id="{{ $item->id }}"></i>
                                 @else
                                     <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
                                 @endif
-                                <input type="hidden" class="likeCountVal" id="likeCountVal" value="{{ $item->like }}">
+                                <input type="hidden" class="likeCountVal" id="likeCountVal"
+                                    value="{{ $item->like }}">
                                 <span class="me-5 likeCountShow" id="likeCountShow">{{ $item->like }}</span>
                             </div>
 
@@ -191,7 +272,5 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-    <script>
-
-    </script>
+    <script></script>
 @endsection

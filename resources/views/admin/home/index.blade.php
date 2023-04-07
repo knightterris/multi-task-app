@@ -6,6 +6,10 @@
             cursor: pointer;
         }
 
+        .ti-bookmark-alt {
+            cursor: pointer;
+        }
+
         .fa-heart {
             cursor: pointer;
         }
@@ -30,8 +34,22 @@
         @foreach ($data as $item)
             <div class="col-4">
                 <div class="card p-3" style="height:850px;">
-                    <div class="card-header text-center">{{ $item->name }}</div>
-                    {{-- <div class="card-body"> --}}
+                    <div class="card-header text-center">
+                        <div class="row">
+                            <div class="col-lg-11 col-md-11 col-sm-11">{{ $item->name }}</div>
+                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                @if ($item->wishlist_status == 0)
+                                    <i class="ti-bookmark-alt wishlist" data-id="{{ $item->id }}"
+                                        title="Add Bookmark"></i>
+                                @else
+                                    <a href="{{ route('admin.product.removeWishList', $item->id) }}">
+                                        <i class="fa-solid fa-bookmark" title="Remove Bookmark"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="my-3">
                         @if ($item->image)
                             <a href="{{ asset('storage/product_images/' . $item->image) }} "><img
@@ -42,7 +60,6 @@
                                 style="width:500px; height:300px; object-fit: contain;">
                         @endif
                     </div>
-                    {{-- </div> --}}
                     <div class="card-footer">
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Created By</h6>
@@ -52,10 +69,7 @@
                             <h6>Created At</h6>
                             <span>{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
                         </div>
-                        <div class="my-3 d-flex justify-content-between">
-                            <h6>Updated At</h6>
-                            <span>{{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}</span>
-                        </div>
+
                         <div class="my-3 d-flex justify-content-between">
                             <h6>Product Name</h6>
                             <span>{{ $item->name }}</span>

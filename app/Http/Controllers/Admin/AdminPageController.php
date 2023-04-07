@@ -91,8 +91,5 @@ class AdminPageController extends Controller
         $postsCount = Product::where('created_by_id',Auth::user()->id)->count();
         $data = Product::where('created_by_id',Auth::user()->id)->get();
         return view('admin.myWall.index',compact('postsCount','data'));
-    }
-    public function followersList(){
-        return view('admin.myWall.Follower');
-    }
+    } 
 }
