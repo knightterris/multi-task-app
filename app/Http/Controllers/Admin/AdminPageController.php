@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Image;
 use App\Models\Comment;
 use App\Models\Product;
@@ -91,5 +92,9 @@ class AdminPageController extends Controller
         $postsCount = Product::where('created_by_id',Auth::user()->id)->count();
         $data = Product::where('created_by_id',Auth::user()->id)->get();
         return view('admin.myWall.index',compact('postsCount','data'));
-    } 
+    }
+    public function userLists(){
+        $data = User::get();
+        return view('admin.usersmanagement.index',compact('data'));
+    }
 }

@@ -39,6 +39,12 @@ Route::prefix('admin')->group(function () {
     Route::post('update/profile/{id}',[AdminController::class,'updateProfile'])->name('admin.updateProfile');
     Route::get('change/password/page',[AdminPageController::class,'changePasswordPage'])->name('admin.changePasswordPage');
     Route::post('change/password',[AdminController::class,'changePassword'])->name('admin.changePassword');
+    //wishlist
+    Route::get('wishlist/page',[AdminPageController::class,'wishListPage'])->name('admin.wishlist.wishlistPage');
+    //user management
+    Route::prefix('management')->group(function(){
+        Route::get('users/list',[AdminPageController::class,'userLists'])->name('admin.users.list');
+    });
     Route::prefix('category')->group(function(){
         //food category
         Route::get('category/page',[AdminPageController::class,'categoryPage'])->name('admin.category.page');
@@ -76,9 +82,7 @@ Route::prefix('admin')->group(function () {
         Route::get('index',[AdminPageController::class,'myWall'])->name('admin.myWall.index');
         Route::post('change/profileDetails',[AdminController::class,'changeProfileDetails'])->name('admin.myWall.changeProfileDetails');
     });
-    Route::prefix('myWishList')->group(function(){
-        Route::get('wishlist/page',[AdminPageController::class,'wishListPage'])->name('admin.wishlist.wishlistPage');
-    });
+
 });
 Route::prefix('user')->group(function () {
     Route::get('homePage',[UserPageController::class,'homePage'])->name('user.homepage');

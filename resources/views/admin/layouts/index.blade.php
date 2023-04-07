@@ -69,29 +69,37 @@
 
                     <li><a href="{{ route('admin.changePasswordPage') }}"><i class="ti-key"></i> Password </a></li>
                     <li><a href="{{ route('admin.myWall.index') }}"><i class="ti-user"></i> My Wall </a></li>
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-user"></i> User Management <span
+                                class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{{ route('admin.users.list') }}">Users</a></li>
+                        </ul>
+                    </li>
 
                     </li>
                     <li class="label">Features</li>
                     <li><a href="{{ route('admin.category.page') }}"><i class="ti-server"></i> Category</a></li>
                     <li><a href="{{ route('admin.product.productListPage') }}"><i class="ti-package"></i> Product</a>
                     <li><a href="{{ route('admin.wishlist.wishlistPage') }}"><i class="ti-heart"></i>Wishlist</a></li>
-                    <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
+
+                    {{--     <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
                                 class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
-                            <li><a href="ui-typography.html">Typography</a></li>
-                            <li><a href="ui-alerts.html">Alerts</a></li>
+                            <li><a href="">Typography</a></li>
+                            <li><a href="">Alerts</a></li>
 
-                            <li><a href="ui-button.html">Button</a></li>
-                            <li><a href="ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="">Button</a></li>
+                            <li><a href="">Dropdown</a></li>
 
-                            <li><a href="ui-list-group.html">List Group</a></li>
+                            <li><a href="">List Group</a></li>
 
-                            <li><a href="ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="ui-tab.html">Tab</a></li>
+                            <li><a href="">Progressbar</a></li>
+                            <li><a href="">Tab</a></li>
 
                         </ul>
                     </li>
-                    <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> Components <span
+                       <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> Components <span
                                 class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
                             <li><a href="uc-calendar.html">Calendar</a></li>
@@ -151,7 +159,7 @@
                             <li><a href="page-reset-password.html">Forgot password</a></li>
                         </ul>
                     </li>
-                    <li><a href="../documentation/index.html"><i class="ti-file"></i> Documentation</a></li>
+                    <li><a href="../documentation/index.html"><i class="ti-file"></i> Documentation</a></li> --}}
                     {{-- <li><a><i class="ti-close"></i> Logout</a></li> --}}
 
                 </ul>
