@@ -58,7 +58,7 @@
                     <p class="h6 text-muted mt-1">Works At</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->works_at ?? '' }}<i class="ti-pencil ms-3"
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->works_at ?? '-' }}<i class="ti-pencil ms-3"
                             data-bs-toggle="modal" data-bs-target="#workModal"></i></p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <p class="h6 text-muted mt-1">Studied At</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->study_at ?? '' }}</p>
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->study_at ?? '-' }}</p>
                 </div>
             </div>
             <div class="row">
@@ -81,15 +81,14 @@
                     <p class="h6 text-muted mt-1">Live In</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->address }}</p>
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->address ?? '-' }}</p>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt delectus aliquam dolor error ea eos
-        assumenda itaque, nihil repudiandae suscipit corrupti commodi optio ipsam pariatur odit, at accusantium culpa ut!
+    <p class="my-3">{{ Auth::user()->bio ?? '' }}
     </p>
     <!--215 characters-->
 
@@ -180,7 +179,7 @@
     {{-- Study and Work Modal --}}
     <!-- Modal -->
     <div class="modal fade" id="workModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
@@ -194,6 +193,9 @@
                     <label for="study_at" class="mt-2">Studied At</label>
                     <input type="text" name="study_at" id="study_at" class="form-control"
                         placeholder="Enter where you study ">
+
+                    <label for="bio" class="mt-2">Bio</label>
+                    <textarea name="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -299,9 +301,23 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
     <script>
+        let bioValue = '';
+        $(document).on('input', '#bio', function() {
+            bioLength = $('#bio').val().length
+            if (bioLength > 215) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Words Limit Exceeded!',
+                    text: 'You cannot type more than 215 words!',
+                })
+                bioValue = $('#bio').val();
+                $('#bio').val(bioValue.substring(0, 216));
+            }
+        })
         $(document).on('click', '.saveChanges', function() {
             var works_at = $('#works_at').val();
             var study_at = $('#study_at').val();
+            var bio = bioValue;
             $.ajax({
                 type: "POST",
                 url: "{{ route('admin.myWall.changeProfileDetails') }}",
@@ -310,7 +326,8 @@
                 },
                 data: {
                     worksAt: works_at,
-                    studyAt: study_at
+                    studyAt: study_at,
+                    bio: bio
                 },
                 success: function(data) {
                     Swal.fire({

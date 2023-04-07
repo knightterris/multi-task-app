@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('works_at')->nullable();
             $table->string('study_at')->nullable();
+            $table->longText('bio')->nullable();
             $table->bigInteger('phone')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

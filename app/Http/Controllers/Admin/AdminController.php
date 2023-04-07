@@ -70,7 +70,8 @@ class AdminController extends Controller
     public function changeProfileDetails(Request $request){
         $data = [
             'works_at'=>$request->worksAt,
-            'study_at'=>$request->studyAt
+            'study_at'=>$request->studyAt,
+            'bio'=>$request->bio
         ];
         User::where('id',Auth::user()->id)->update($data);
         return "Profile Updated.";
