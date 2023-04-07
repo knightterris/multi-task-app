@@ -53,8 +53,8 @@ class ProductController extends Controller
             $request->file('product_image')->storeAs('public/product_images',$image_name);
             $data['image'] = $image_name;
         }
-        Product::where('id',$request->product_id)->update($data);
         $this->getMultipleImages($request);
+        Product::where('id',$request->product_id)->update($data);
         return "You have updated your product successfully.";
     }
     public function deleteProduct(Request $request){
