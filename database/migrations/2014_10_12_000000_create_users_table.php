@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->string('address')->nullable();
             $table->string('gender')->nullable();
+            $table->string('works_at')->nullable();
+            $table->string('study_at')->nullable();
             $table->bigInteger('phone')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

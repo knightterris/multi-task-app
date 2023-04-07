@@ -38,13 +38,13 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12">
-                    <div class="d-flex mt-3">
-                        <p class="me-2" data-bs-toggle="modal" data-bs-target="#followingModal">3</p> Following
+                    <div class="d-flex mt-3" data-bs-toggle="modal" data-bs-target="#followingModal">
+                        <p class="me-2">3</p> Following
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12">
-                    <div class="d-flex mt-3">
-                        <p class="me-2" data-bs-toggle="modal" data-bs-target="#followerModal">999K</p> Followers
+                    <div class="d-flex mt-3" data-bs-toggle="modal" data-bs-target="#followerModal">
+                        <p class="me-2">999K</p> Followers
                     </div>
                 </div>
             </div>
@@ -58,7 +58,8 @@
                     <p class="h6 text-muted mt-1">Works At</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">Host Myanmar Technology</p>
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->works_at ?? '' }}<i class="ti-pencil ms-3"
+                            data-bs-toggle="modal" data-bs-target="#workModal"></i></p>
                 </div>
             </div>
             <div class="row">
@@ -69,7 +70,7 @@
                     <p class="h6 text-muted mt-1">Studied At</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">New Myanmar University</p>
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->study_at ?? '' }}</p>
                 </div>
             </div>
             <div class="row">
@@ -80,7 +81,7 @@
                     <p class="h6 text-muted mt-1">Live In</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                    <p class="h6 text-muted mt-1 text-left">Yangon, Myanmar</p>
+                    <p class="h6 text-muted mt-1 text-left">{{ Auth::user()->address }}</p>
                 </div>
             </div>
         </div>
@@ -176,6 +177,31 @@
         </div>
     </div>
     <hr>
+    {{-- Study and Work Modal --}}
+    <!-- Modal -->
+    <div class="modal fade" id="workModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="works_at">Work</label>
+                    <input type="text" name="works_at" id="works_at" class="form-control"
+                        placeholder="Enter where you work">
+
+                    <label for="study_at" class="mt-2">Studied At</label>
+                    <input type="text" name="study_at" id="study_at" class="form-control"
+                        placeholder="Enter where you study ">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary saveChanges">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- My Products --}}
     <div class="container">
@@ -272,5 +298,30 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-    <script></script>
+    <script>
+        $(document).on('click', '.saveChanges', function() {
+            var works_at = $('#works_at').val();
+            var study_at = $('#study_at').val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.myWall.changeProfileDetails') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    worksAt: works_at,
+                    studyAt: study_at
+                },
+                success: function(data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: data,
+                    })
+                    $('.swal2-confirm').on('click', function() {
+                        location.reload();
+                    })
+                }
+            });
+        })
+    </script>
 @endsection

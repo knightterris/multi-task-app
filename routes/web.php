@@ -74,6 +74,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('myWall')->group(function(){
         Route::get('index',[AdminPageController::class,'myWall'])->name('admin.myWall.index');
+        Route::post('change/profileDetails',[AdminController::class,'changeProfileDetails'])->name('admin.myWall.changeProfileDetails');
     });
     Route::prefix('myWishList')->group(function(){
         Route::get('wishlist/page',[AdminPageController::class,'wishListPage'])->name('admin.wishlist.wishlistPage');

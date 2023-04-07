@@ -35,7 +35,6 @@ class AdminController extends Controller
             'email'=>$request->email,
             'address'=>$request->address,
             'phone'=>$request->phone,
-            'address'=>$request->address
         ];
     }
     private function profileValidation($request){
@@ -66,5 +65,14 @@ class AdminController extends Controller
             'newPassword'=>'required|max:15',
             'passwordConfirmation'=>'required|max:15|same:newPassword'
         ])->validate();
+    }
+
+    public function changeProfileDetails(Request $request){
+        $data = [
+            'works_at'=>$request->worksAt,
+            'study_at'=>$request->studyAt
+        ];
+        User::where('id',Auth::user()->id)->update($data);
+        return "Profile Updated.";
     }
 }
