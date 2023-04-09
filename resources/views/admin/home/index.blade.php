@@ -32,10 +32,10 @@
     @endif
     <div class="row">
         @foreach ($data as $item)
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card p-3" style="height:850px;">
                     <div class="card-header text-center">
-                        <div class="row">
+                        <div class="d-flex">
                             <div class="col-lg-11 col-md-11 col-sm-11">{{ $item->name }}</div>
                             <div class="col-lg-1 col-md-1 col-sm-1">
                                 @if ($item->wishlist_status == 0)
@@ -54,10 +54,10 @@
                         @if ($item->image)
                             <a href="{{ asset('storage/product_images/' . $item->image) }} "><img
                                     src="{{ asset('storage/product_images/' . $item->image) }}" class="img-fluid"
-                                    style="width:500px; height:300px; object-fit: contain;"></a>
+                                    style="width:500px; height:300px; object-fit: cover;"></a>
                         @else
                             <img src="{{ asset('home/admin/no-image.png') }}" class="img-fluid"
-                                style="width:500px; height:300px; object-fit: contain;">
+                                style="width:500px; height:300px; object-fit: cover;">
                         @endif
                     </div>
                     <div class="card-footer">
@@ -99,27 +99,27 @@
                         </div>
                     </div>
                     <div class="card-footer mb-3">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                                @if ($item->like_status == 'liked')
-                                    <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
-                                        data-id="{{ $item->id }}"></i>
-                                @else
-                                    <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
-                                @endif
-                                <input type="hidden" class="likeCountVal" id="likeCountVal" value="{{ $item->like }}">
-                                <span class="me-5 likeCountShow" id="likeCountShow">{{ $item->like }}</span>
-                            </div>
+                        <div class="d-flex">
+                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
+                            @if ($item->like_status == 'liked')
+                                <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
+                                    data-id="{{ $item->id }}"></i>
+                            @else
+                                <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
+                            @endif
+                            <input type="hidden" class="likeCountVal" id="likeCountVal" value="{{ $item->like }}">
+                            <span class="me-5 likeCountShow" id="likeCountShow">{{ $item->like }}</span>
+                            {{-- </div> --}}
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                                <a href="{{ route('admin.product.commentList', $item->id) }}"><i
-                                        class="fa-regular fa-comments text-dark me-3"></i>{{ $item->comment }}</a>
-                            </div>
+                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
+                            <a href="{{ route('admin.product.commentList', $item->id) }}"><i
+                                    class="fa-regular fa-comments text-dark me-3"></i>{{ $item->comment }}</a>
+                            {{-- </div> --}}
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                                <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
-                                        title="See Details"></i></a>
-                            </div>
+                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
+                            <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
+                                    title="See Details"></i></a>
+                            {{-- </div> --}}
 
 
                         </div>

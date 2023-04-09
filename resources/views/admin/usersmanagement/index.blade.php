@@ -14,6 +14,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,10 +24,10 @@
                             <td>
                                 @if ($item->photo == null)
                                     <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
-                                        class="w-25 rounded-circle bg-secondary">
+                                        style="width:200px; height:200px;" class="rounded-circle bg-secondary">
                                 @else
                                     <img src="{{ asset('storage/' . $item->photo) }}" alt="" srcset=""
-                                        class="w-25 rounded-circle">
+                                        style="width:200px; height:200px;" class="rounded-circle">
                                 @endif
                             </td>
 
@@ -44,6 +45,19 @@
 
                             <td>
                                 {{ $item->phone }}
+                            </td>
+                            <td>
+                                <a href="">
+                                    <i class="ti-eye"></i>
+                                </a>
+
+                                <a href="">
+                                    <i class="ti-pencil"></i>
+                                </a>
+
+                                <a href="">
+                                    <i class="ti-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
