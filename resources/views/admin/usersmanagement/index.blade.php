@@ -83,9 +83,4 @@
         </div>
     </div>
 @endsection
-@section('scripts')
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-
-@endsection
