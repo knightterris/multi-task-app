@@ -44,6 +44,10 @@ Route::prefix('admin')->group(function () {
     //user management
     Route::prefix('management')->group(function(){
         Route::get('users/list',[AdminPageController::class,'userLists'])->name('admin.users.list');
+        Route::get('users/show/{id}',[AdminPageController::class,'showUser'])->name('admin.users.show');
+        Route::get('users/edit/{id}',[AdminPageController::class,'editUser'])->name('admin.users.edit');
+        Route::post('users/update/{id}',[AdminController::class,'updateUser'])->name('admin.users.update');
+        Route::get('users/delete/{id}',[AdminController::class,'deleteUser'])->name('admin.users.delete');
     });
     Route::prefix('category')->group(function(){
         //food category

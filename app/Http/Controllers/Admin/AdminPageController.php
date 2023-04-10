@@ -97,4 +97,12 @@ class AdminPageController extends Controller
         $data = User::get();
         return view('admin.usersmanagement.index',compact('data'));
     }
+    public function showUser($id){
+        $data = User::where('id',$id)->first();
+        return view('admin.usersmanagement.show',compact('data'));
+    }
+    public function editUser($id){
+        $data = User::where('id',$id)->first();
+        return view('admin.usersmanagement.edit',compact('data'));
+    }
 }

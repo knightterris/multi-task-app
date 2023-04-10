@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
+    //admin
     public function updateProfile($id,Request $request){
         $this->profileValidation($request);
         $data = $this->getUpdateProfileData($request);
@@ -75,5 +76,36 @@ class AdminController extends Controller
         ];
         User::where('id',Auth::user()->id)->update($data);
         return "Profile Updated.";
+    }
+
+    //user management
+    public function updateUser(Request $request,$id){
+        $data = $this->getUpdateProfileData($request);
+        if ($request->hasFile('image')) {
+            $oldData = User::where('id',$id)->first();
+            $oldPhoto = $oldData->photo;
+            if($oldPhoto != null){
+                Storage::delete('public/'.$oldPhoto);
+            }
+            $fileName = uniqid().$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/',$fileName);
+            $data['photo'] = $fileName;
+        }
+        $data['gender'] = $request->gender;
+        $data['role']   = $request->role;
+        User::where('id',$id)->update($data);
+        return redirect()->route('admin.users.list')->with(['updateSuccess'=>'Profile has been updated.']);
+    }
+    public function deleteUser($id){
+        $data = User::where('id',$id)->first();
+        $image = $data->photo;
+        if($image){
+            $image_path = public_path().'/storage/'.$image;
+            if(file_exists($image_path)){
+                unlink($image_path);
+            }
+        }
+        User::where('id',$id)->delete();
+        return back()->with(['deleteSuccess'=>'You have deleted a user.']);
     }
 }

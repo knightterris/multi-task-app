@@ -5,6 +5,18 @@
 @section('content')
     <div class="row">
         <div class="container">
+            @if (session('updateSuccess'))
+                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                    <strong>{{ session('updateSuccess') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('deleteSuccess'))
+                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                    <strong>{{ session('deleteSuccess') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <table class="table">
                 <thead>
                     <tr>
@@ -46,19 +58,23 @@
                             <td>
                                 {{ $item->phone }}
                             </td>
-                            <td>
-                                <a href="">
-                                    <i class="ti-eye"></i>
-                                </a>
+                            @if (Auth::user()->id == $item->id)
+                                <td></td>
+                            @else
+                                <td>
+                                    <a href="{{ route('admin.users.show', $item->id) }}" class="mx-1">
+                                        <i class="ti-eye text-dark" title="Show User"></i>
+                                    </a>
 
-                                <a href="">
-                                    <i class="ti-pencil"></i>
-                                </a>
+                                    <a href="{{ route('admin.users.edit', $item->id) }}" class="mx-1">
+                                        <i class="ti-pencil text-dark" title="Edit User"></i>
+                                    </a>
 
-                                <a href="">
-                                    <i class="ti-trash"></i>
-                                </a>
-                            </td>
+                                    <a href="{{ route('admin.users.delete', $item->id) }}" class="mx-1">
+                                        <i class="ti-trash text-dark" title="Delete User"></i>
+                                    </a>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
 
