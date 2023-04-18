@@ -94,7 +94,7 @@
 
                         </div>
                         <div class="my-3 ">
-                            <h6>Description {{ $item->id }}</h6>
+                            <h6>Description </h6>
                             <span>{{ Str::limit($item->description, 100) }}</span>
                         </div>
                     </div>
