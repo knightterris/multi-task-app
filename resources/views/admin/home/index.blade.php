@@ -106,7 +106,7 @@
                             @else
                                 <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
                             @endif --}}
-                            @if (\app\Models\Reaction::where('product_id', $item->id)->exists())
+                            @if (\app\Models\Reaction::where('product_id', $item->id)->where('user_id', Auth::user()->id)->exists())
                                 <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
                                     data-id="{{ $item->id }}"></i>
                             @else
