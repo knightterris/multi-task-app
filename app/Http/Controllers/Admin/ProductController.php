@@ -6,6 +6,7 @@ use Storage;
 use App\Models\Image;
 use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Reaction;
 use App\Models\MyWishList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -94,21 +95,30 @@ class ProductController extends Controller
         $product = Product::where('id',$request->each_id)->first();
         $data = [
             'like'=>$product->like + 1,
-            'like_status'=>'liked',
         ];
         Product::where('id',$request->each_id)->update($data);
+        $reaction_data = [
+            'user_id'=>Auth::user()->id,
+            'product_id'=>$request->each_id,
+        ];
+        Reaction::create($reaction_data);
 
         $data['id'] = Product::where('id',$request->each_id)->pluck('id');
+        $data['like_status'] = 'liked';
         return response()->json($data, 200);
     }
     public function dislike(Request $request){
         $product = Product::where('id',$request->each_id)->first();
         $data = [
             'like'=>$product->like - 1,
-            'like_status'=>'unliked',
         ];
         Product::where('id',$request->each_id)->update($data);
+
+        Reaction::where('user_id',Auth::user()->id)
+                ->where('product_id',$request->each_id)->delete();
+
         $data['id'] = Product::where('id',$request->each_id)->pluck('id');
+        $data['like_status'] = 'unliked';
         return response()->json($data, 200,['Unliked']);
     }
     public function addComment(Request $request){
@@ -167,4 +177,3 @@ class ProductController extends Controller
         }
     }
 }
-

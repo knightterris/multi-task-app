@@ -100,8 +100,13 @@
                     </div>
                     <div class="card-footer mb-3">
                         <div class="d-flex">
-                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
-                            @if ($item->like_status == 'liked')
+                            {{-- @if ($item->like_status == 'liked')
+                                <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
+                                    data-id="{{ $item->id }}"></i>
+                            @else
+                                <i class="ti-heart me-2 like-icon" id="like-icon" data-id="{{ $item->id }}"></i>
+                            @endif --}}
+                            @if (\app\Models\Reaction::where('product_id', $item->id)->exists())
                                 <i class="fa-solid fa-heart me-2 unlike-icon" id="unlike-icon"
                                     data-id="{{ $item->id }}"></i>
                             @else
@@ -109,17 +114,12 @@
                             @endif
                             <input type="hidden" class="likeCountVal" id="likeCountVal" value="{{ $item->like }}">
                             <span class="me-5 likeCountShow" id="likeCountShow">{{ $item->like }}</span>
-                            {{-- </div> --}}
 
-                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
                             <a href="{{ route('admin.product.commentList', $item->id) }}"><i
                                     class="fa-regular fa-comments text-dark me-3"></i>{{ $item->comment }}</a>
-                            {{-- </div> --}}
 
-                            {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-12"> --}}
                             <a href="{{ route('admin.product.show', $item->id) }}"><i class="ti-eye ml-3 text-dark"
                                     title="See Details"></i></a>
-                            {{-- </div> --}}
 
 
                         </div>
@@ -187,7 +187,6 @@
                         title: 'Liked',
                     }).then((result) => {
                         if (data.like_status == "liked") {
-
                             finalLikeCount = data.like;
                             likeCountShow.html(finalLikeCount);
                             $(this).replaceWith(

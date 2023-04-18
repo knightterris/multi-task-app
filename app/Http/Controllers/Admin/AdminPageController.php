@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Reaction;
 use App\Models\MyWishList;
 use App\Models\FoodCategory;
 use App\Models\ItemCategory;
@@ -18,7 +19,8 @@ class AdminPageController extends Controller
 {
     public function homePage(){
         $data = Product::get();
-        return view('admin.home.index',compact('data'));
+        $reaction_data = Reaction::get();
+        return view('admin.home.index',compact('data','reaction_data'));
     }
     public function profilePage(){
         return view('admin.profile.index');

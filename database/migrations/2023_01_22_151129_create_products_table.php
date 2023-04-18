@@ -28,7 +28,7 @@ return new class extends Migration
             $table->bigInteger('like')->default(0);
             $table->bigInteger('comment')->default(0);
             $table->integer('wishlist_status')->default(0);
-            $table->string('like_status')->default('unliked');
+            // $table->string('like_status')->default('unliked');
             $table->timestamps();
         });
     }
