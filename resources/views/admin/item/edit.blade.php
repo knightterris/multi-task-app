@@ -33,40 +33,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
-        $(document).on('click', '.update', function() {
-            var updateName = $('#updateItemName').val();
-            var updateDescription = $('#updateItemDescription').val();
-            if (updateName == '' || updateDescription == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Please type something to create!',
-                })
-                $('.swal2-confirm').on('click', function() {
-                    location.reload();
-                })
-            }
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin.item.updateItemCategory', $data->id) }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    item_category_name_update: updateName,
-                    item_category_description_update: updateDescription
-                },
-                success: function(data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: data,
-                    })
-                    $('.swal2-confirm').on('click', function() {
-                        window.location.href = "{{ route('admin.category.page') }}";
-                    })
-                }
-            });
-        })
-    </script>
+    <script src="{{ asset('home/customJs/category.js') }}"></script>
 @endsection
