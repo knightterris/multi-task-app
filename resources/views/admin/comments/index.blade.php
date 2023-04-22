@@ -26,7 +26,7 @@
                 <div class="card-body">
                     @foreach ($comments as $comment)
                         <div class="row cmtCard my-3 rounded">
-                            <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                            <div class="col-lg-1 col-md-3 col-sm-3 col-12">
                                 @if ($data->user_photo == null)
                                     <img src="{{ asset('home/admin/default.png') }}" alt="" srcset=""
                                         class="w-100 rounded-circle bg-secondary">
@@ -65,40 +65,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).on('click', '.send', function() {
-            var msg = $('#comment').val();
-            var productId = $('#product_id').val();
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin.product.addComment') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    message: msg,
-                    product_id: productId,
-                },
-                success: function(data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: data,
-                    })
-                    $('.swal2-confirm').on('click', function() {
-                        location.reload();
-                    })
-                }
-            });
-        })
-        $(document).on('input', '.comment', function() {
-            var commentLength = $('#comment').val().length; //max 75
-            var currentValue = $('#comment').val();
-            if (commentLength > 75) {
-                $('#comment').replaceWith(
-                    "<textarea class='form-control commetTextarea' type='text' id='comment' name='comment' rows='5'>" +
-                    currentValue + "</textarea>");
-                $('.commetTextarea').css('height', '100px');
-            }
-        })
-    </script>
+    <script src="{{ asset('home/customJs/comment.js') }}"></script>
 @endsection

@@ -29,7 +29,7 @@
                         <div class="card-header">{{ trans('globalText.product.product_cover_image') }}</div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-12 col-12 offset-2">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 ">
                                     <div class="card">
                                         <div class="card-body">
                                             @if ($data->image)
@@ -163,7 +163,7 @@
                             <div class="row">
                                 @if (count($images) != 0)
                                     @foreach ($images as $item)
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <a href="{{ asset('storage/product_images/' . $item->image) }}">

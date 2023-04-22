@@ -111,7 +111,8 @@
                                 @if ($data->image)
                                     <div class="card-body">
                                         <img src="{{ asset('storage/product_images/' . $data->image) }}"
-                                            class="img-fluid img-thumbnail" style="width:100%; height:300px;">
+                                            class="img-fluid img-thumbnail"
+                                            style="width:100%; height:300px;object-fit:cover !important;">
                                     </div>
                                     <div class="card-footer">
                                         <div class="d-flex justify-content-end">
@@ -140,7 +141,8 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <img src="{{ asset('storage/product_images/' . $item->image) }}"
-                                                class="img-fluid img-thumbnail" style="width:100%; height:300px;">
+                                                class="img-fluid img-thumbnail"
+                                                style="width:100%; height:300px; object-fit:cover !important;">
                                         </div>
                                         <div class="card-footer">
                                             <div class="d-flex justify-content-end">
@@ -163,107 +165,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
-        $(document).on('click', '#delete_cover', function() {
-            var coverImageId = $('#cover_image_id').val();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Are you sure to delete cover image?',
-            })
-            $('.swal2-confirm').on('click', function() {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('admin.product.deleteCoverImage', $data->id) }}",
-                    data: coverImageId,
-                    success: function(data) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data,
-                        })
-                        $('.swal2-confirm').on('click', function() {
-                            location.reload();
-                        })
-                    },
-
-                });
-            })
-        })
-
-        $(document).on('click', '.each_image_id', function() {
-            var eachImageId = $(this).attr('data-imageId');
-            Swal.fire({
-                icon: 'warning',
-                title: 'Are you sure to delete this image?',
-            })
-            $('.swal2-confirm').on('click', function() {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('admin.product.deleteEachImage', $item->id) }}",
-                    data: {
-                        image_id: eachImageId
-                    },
-                    success: function(data) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data,
-                        })
-                        $('.swal2-confirm').on('click', function() {
-                            location.reload();
-                        })
-                    },
-
-                });
-            })
-        })
-
-        $(document).ready(function() {
-            $(document).on('click', '.update', function() {
-                let formData = new FormData();
-                let files = $('#product_images')[0].files;
-                for (let i = 0; i < files.length; i++) {
-                    formData.append('product_images[]', files[i]);
-                }
-                formData.append('product_name', $('#product_name').val());
-                formData.append('product_description', $('#product_description').val());
-                formData.append('product_price', $('#product_price').val());
-                formData.append('product_image', $('#product_image')[0].files[0]);
-                formData.append('product_category', $('#product_category').val());
-                formData.append('product_count', $('#product_count').val());
-                formData.append('product_status', $('#product_status').val());
-                formData.append('product_type', $('#product_type').val());
-                formData.append('product_id', $("#product_id").val());
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('admin.product.update') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data,
-                        })
-                        $('.swal2-confirm').on('click', function() {
-                            window.location.href =
-                                "{{ route('admin.product.productListPage') }}"
-                        })
-                    },
-                    error: function(xhr) {
-                        if (xhr.status == 422) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Please type something and add some images to create!',
-                            })
-                        }
-                    }
-                });
-
-            });
-        });
-    </script>
+    <script src="{{ asset('home/customJs/product.js') }}"></script>
 @endsection

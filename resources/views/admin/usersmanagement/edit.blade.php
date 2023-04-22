@@ -4,7 +4,14 @@
     <div class="row">
         <div class="col-6 offset-3">
             <div class="card">
-                <div class="card-header text-center py-3">{{ trans('globalText.admin.profile') }}</div>
+                <div class="card-header text-center py-3">
+                    <div class="d-flex">
+                        <i class="ti-arrow-left text-dark" onclick="history.back()"></i>
+                        <div class="text-center">
+                            {{ trans('globalText.admin.profile') }}
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="col-6 offset-3 my-3">
                         @if ($data->photo == null)
@@ -100,14 +107,14 @@
 
                                     <div class="mt-3 d-flex justify-content-end">
 
-                                        <a href="{{ route('admin.users.list') }}">
-                                            <button
-                                                class="btn btn-primary mt-3 mr-3">{{ trans('globalText.admin.back') }}</button>
-                                        </a>
+                                        {{-- <a href="{{ route('admin.users.list') }}"> --}}
+
+                                        {{-- </a> --}}
                                         <button type="submit"
                                             class=" btn btn-sm btn-primary mt-3 ms-3">{{ trans('globalText.admin.update_profile') }}</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>

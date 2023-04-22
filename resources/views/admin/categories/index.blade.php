@@ -22,7 +22,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-5 offset-1" style="margin-top: 50px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top: 50px;">
             @if (session('deleteSuccess'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>{{ session('deleteSuccess') }}</strong>
@@ -64,7 +64,7 @@
 
         {{-- item category --}}
 
-        <div class="col-5" style="margin-top: 50px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top: 50px;">
             @if (session('ItemdeleteSuccess'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>{{ session('ItemdeleteSuccess') }}</strong>
