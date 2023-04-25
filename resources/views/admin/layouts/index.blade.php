@@ -27,7 +27,6 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
     <!-- Styles -->
     <link href="{{ asset('home/admin/css/lib/calendar2/pignose.calendar.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('home/admin/css/lib/chartist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/themify-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/owl.carousel.min.css') }}" rel="stylesheet" />
@@ -329,7 +328,7 @@
                                 {{-- <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt=""
                                     srcset="" class="rounded-circle"> --}}
                                 <span class="ml-3">
-                                    <form action="{{ route('logout') }}" method="post">
+                                    <form action="{{ route('custom.logout') }}" method="post">
                                         @csrf
                                         <button class="btn btn-secondary" type="submit" title="Logout"><i
                                                 class="ti-key"></i></button>
@@ -359,14 +358,7 @@
 
     @yield('scripts')
     {{-- logout --}}
-    <script>
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function() {
-            myInput.focus()
-        })
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
@@ -393,7 +385,6 @@
     <script src="{{ asset('home/admin/js/lib/weather/weather-init.js') }}"></script>
     <script src="{{ asset('home/admin/js/lib/circle-progress/circle-progress.min.js') }}"></script>
     <script src="{{ asset('home/admin/js/lib/circle-progress/circle-progress-init.js') }}"></script>
-    <script src="{{ asset('home/admin/js/lib/chartist/chartist.min.js') }}"></script>
     <script src="{{ asset('home/admin/js/lib/sparklinechart/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('home/admin/js/lib/sparklinechart/sparkline.init.js') }}"></script>
     <script src="{{ asset('home/admin/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\API\APIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\APIController;
+use App\Http\Controllers\API\UserAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('foodCategory',[APIController::class,'getFoodCategory']);
 Route::get('itemCategory',[APIController::class,'getItemCategory']);
 Route::get('allProducts',[APIController::class,'getAllProducts']);
+
+//user login
+Route::post('user/login',[UserAPIController::class,'accountLogin']);

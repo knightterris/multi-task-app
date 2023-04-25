@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\UserPageController;
 use App\Http\Controllers\Admin\AdminPageController;
+use App\Http\Controllers\User\CustomLogoutController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\ItemCategoryController;
 
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 });
 
+Route::post('/custom-logout', [CustomLogoutController::class, 'logout'])->name('custom.logout');
 Route::get('/loginPage',[AuthController::class,'loginPage'])->name('auth.loginPage');
 Route::get('/registerPage',[AuthController::class,'registerPage'])->name('auth.registerPage');
 
@@ -90,4 +92,5 @@ Route::prefix('admin')->group(function () {
 });
 Route::prefix('user')->group(function () {
     Route::get('homePage',[UserPageController::class,'homePage'])->name('user.homepage');
+
 });
