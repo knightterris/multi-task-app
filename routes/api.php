@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CategoryAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\APIController;
@@ -26,3 +27,10 @@ Route::get('allProducts',[APIController::class,'getAllProducts']);
 
 //user login
 Route::post('user/login',[UserAPIController::class,'accountLogin']);
+
+
+//CRUDS
+Route::post('createFoodCategory',[CategoryAPIController::class,'createFoodCategory']);
+Route::post('createItemCategory',[CategoryAPIController::class,'createItemCategory']);
+Route::post('delete/foodCategory',[CategoryAPIController::class,'deleteFoodCategory']);
+Route::post('delete/itemCategory',[CategoryAPIController::class,'deleteItemCategory']);
