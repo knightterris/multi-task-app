@@ -27,6 +27,10 @@ Route::get('allProducts',[APIController::class,'getAllProducts']);
 
 //user login
 Route::post('user/login',[UserAPIController::class,'accountLogin']);
+//get user data with ID
+Route::post('get/user/data',[UserAPIController::class,'getUserDatawithID']);
+//update profile
+Route::post('update/profile',[UserAPIController::class,'updateProfile']);
 
 
 //CRUDS
