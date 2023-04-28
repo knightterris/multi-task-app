@@ -45,3 +45,4 @@ Route::post('delete/itemCategory',[CategoryAPIController::class,'deleteItemCateg
 //product CRUDs
 Route::get('get/categories',[ProductAPIController::class,'getCategories']);
 Route::post('create/product',[ProductAPIController::class,'createProduct']);
+Route::post('delete/product',[ProductAPIController::class,'deleteProduct']);

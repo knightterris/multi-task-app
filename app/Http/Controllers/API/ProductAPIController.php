@@ -57,4 +57,22 @@ class ProductAPIController extends Controller
         }
         return 'Product Created';
     }
+    public function deleteProduct(Request $request){
+        $id = $request->product_id;
+        $data = Product::where('id',$id)->first();
+        $image_path = public_path().'/storage/product_images/'.$data->image;
+        if(file_exists($image_path)){
+            unlink($image_path);
+        }
+        $data = Image::where('product_id',$id)->pluck('image');
+        foreach ($data as $item) {
+            $image_path = public_path().'/storage/product_images/'.$item;
+            if(file_exists($image_path)){
+                unlink($image_path);
+            }
+        }
+        Product::where('id',$id)->delete();
+        Image::where('product_id',$id)->delete();
+        return 'Product Deleted';
+    }
 }
