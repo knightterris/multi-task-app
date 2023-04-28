@@ -71,4 +71,27 @@ class UserAPIController extends Controller
         User::where('id',$request->input('user_id'))->update($data);
         return response()->json($data, 200);
     }
+    public function changePassword(Request $request){
+        // return $request->all();
+        $oldPassword = $request->input('oldPassword');
+        $newPassword = $request->input('newPassword');
+        $confirmPassword = $request->input('confirmNewPassword');
+        $userID = $request->input('userId');
+        if(isset($oldPassword)){
+            $user = User::where('id',$userID)->first();
+            $userOldPassword = $user->password;
+            if(Hash::check($oldPassword, $userOldPassword)){
+                if($newPassword == $confirmPassword){
+                    $data = ['password'=>Hash::make($newPassword)];
+                    User::where('id',$userID)->update($data);
+                    return 'Password changed successfully.';
+                }else{
+                    return 'New passwords not same.';
+                }
+            }else{
+                return 'Old Password do not match.';
+            }
+
+        }
+    }
 }

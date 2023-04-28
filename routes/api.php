@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\CategoryAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\ProductAPIController;
+use App\Http\Controllers\API\CategoryAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::post('user/login',[UserAPIController::class,'accountLogin']);
 Route::post('get/user/data',[UserAPIController::class,'getUserDatawithID']);
 //update profile
 Route::post('update/profile',[UserAPIController::class,'updateProfile']);
+//change password
+Route::post('change/password',[UserAPIController::class,'changePassword']);
 
 
 //CRUDS
@@ -38,3 +41,7 @@ Route::post('createFoodCategory',[CategoryAPIController::class,'createFoodCatego
 Route::post('createItemCategory',[CategoryAPIController::class,'createItemCategory']);
 Route::post('delete/foodCategory',[CategoryAPIController::class,'deleteFoodCategory']);
 Route::post('delete/itemCategory',[CategoryAPIController::class,'deleteItemCategory']);
+
+//product CRUDs
+Route::get('get/categories',[ProductAPIController::class,'getCategories']);
+Route::post('create/product',[ProductAPIController::class,'createProduct']);
