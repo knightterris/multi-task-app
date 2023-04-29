@@ -30,20 +30,18 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 ">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            @if ($data->image)
-                                                <a href="{{ asset('storage/product_images/' . $data->image) }}">
-                                                    <img src="{{ asset('storage/product_images/' . $data->image) }}"
-                                                        class="img-fluid img-thumbnail"
-                                                        style="width:100%; height:300px; object-fit:cover;">
-                                                </a>
-                                            @else
-                                                <img src="{{ asset('home/admin/no-image.png') }}"
-                                                    class="img-fluid img-thumbnail"
-                                                    style="width:500px; height:300px; object-fit:cover;">
-                                            @endif
-                                        </div>
+                                    <div class="">
+                                        {{-- <div class="card-body"> --}}
+                                        @if ($data->image)
+                                            <a href="{{ asset('storage/product_images/' . $data->image) }}">
+                                                <img src="{{ asset('storage/product_images/' . $data->image) }}"
+                                                    style="width:100%; height:380px; object-fit:cover;">
+                                            </a>
+                                        @else
+                                            <img src="{{ asset('home/admin/no-image.png') }}"
+                                                style="width:500px; height:380px; object-fit:cover;">
+                                        @endif
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -164,15 +162,14 @@
                                 @if (count($images) != 0)
                                     @foreach ($images as $item)
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <a href="{{ asset('storage/product_images/' . $item->image) }}">
-                                                        <img src="{{ asset('storage/product_images/' . $item->image) }}"
-                                                            class="img-fluid img-thumbnail"
-                                                            style="width:100%; height:300px; object-fit:cover;">
-                                                    </a>
-                                                </div>
+                                            {{-- <div class=""> --}}
+                                            <div class="">
+                                                <a href="{{ asset('storage/product_images/' . $item->image) }}">
+                                                    <img src="{{ asset('storage/product_images/' . $item->image) }}"
+                                                        style="width:100%; height:380px; object-fit:cover;">
+                                                </a>
                                             </div>
+                                            {{-- </div> --}}
                                         </div>
                                     @endforeach
                                 @else

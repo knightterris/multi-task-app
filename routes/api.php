@@ -46,3 +46,8 @@ Route::post('delete/itemCategory',[CategoryAPIController::class,'deleteItemCateg
 Route::get('get/categories',[ProductAPIController::class,'getCategories']);
 Route::post('create/product',[ProductAPIController::class,'createProduct']);
 Route::post('delete/product',[ProductAPIController::class,'deleteProduct']);
+Route::get('get/product/{id}',[ProductAPIController::class,'getProduct']);
+Route::get('get/edit/product/data/{id}',[ProductAPIController::class,'getEditProductData']);
+Route::post('delete/cover/image/{id}',[ProductAPIController::class,'deleteCoverImage']);
+Route::post('delete/each/image/{id}',[ProductAPIController::class,'deleteEachImage']);
+Route::post('update/product/{id}',[ProductAPIController::class,'updateProduct']);
