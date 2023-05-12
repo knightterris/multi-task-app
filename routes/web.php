@@ -67,6 +67,9 @@ Route::prefix('admin')->group(function () {
         Route::post('update/item/category/{id}',[ItemCategoryController::class,'updateItemCategory'])->name('admin.item.updateItemCategory');
     });
     Route::prefix('product')->group(function(){
+        Route::post('product/media', [ProductController::class,'storeMedia'])->name('admin.products.storeMedia');
+        Route::post('product/ckmedia', [ProductController::class,'storeCKEditorImages'])->name('admin.products.storeCKEditorImages');
+
         Route::get('product/page',[AdminPageController::class,'productPage'])->name('admin.product.productListPage');
         Route::get('product/create/food/page',[AdminPageController::class,'createFoodPage'])->name('admin.product.createFoodPage');
         Route::get('product/create/item/page',[AdminPageController::class,'createItemPage'])->name('admin.product.createItemPage');

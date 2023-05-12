@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Image;
+use App\Models\MyWishList;
 use App\Models\Product;
 use App\Models\FoodCategory;
 use App\Models\ItemCategory;
@@ -60,18 +61,18 @@ class ProductAPIController extends Controller
     }
     public function deleteProduct(Request $request){
         $id = $request->product_id;
-        $data = Product::where('id',$id)->first();
-        $image_path = public_path().'/storage/product_images/'.$data->image;
-        if(file_exists($image_path)){
-            unlink($image_path);
-        }
-        $data = Image::where('product_id',$id)->pluck('image');
-        foreach ($data as $item) {
-            $image_path = public_path().'/storage/product_images/'.$item;
-            if(file_exists($image_path)){
-                unlink($image_path);
-            }
-        }
+        // $data = Product::where('id',$id)->first();
+        // $image_path = public_path().'/storage/product_images/'.$data->image;
+        // if(file_exists($image_path)){
+        //     unlink($image_path);
+        // }
+        // $data = Image::where('product_id',$id)->pluck('image');
+        // foreach ($data as $item) {
+        //     $image_path = public_path().'/storage/product_images/'.$item;
+        //     if(file_exists($image_path)){
+        //         unlink($image_path);
+        //     }
+        // }
         Product::where('id',$id)->delete();
         Image::where('product_id',$id)->delete();
         return 'Product Deleted';
@@ -147,7 +148,8 @@ class ProductAPIController extends Controller
         Product::where('id',$id)->update($data);
 
         if ($request->hasFile('productImages')) {
-            $product = Product::get();
+            // $product = Product::get();
+            $product = Product::where('id',$id)->get();
             for ($i=0; $i < count($product); $i++) {
                 $product_id = $product[$i]['id'];
             }
@@ -162,5 +164,38 @@ class ProductAPIController extends Controller
             }
         }
         return 'Product Updated';
+    }
+
+    public function getMyWishList($id){
+        $data = DB::table('my_wish_lists')
+                    ->join('products','my_wish_lists.product_id','products.id')
+                    ->where('my_wish_lists.user_id',$id)->where('products.wishlist_status',1)->get();
+        // $data = MyWishList::where('user_id',$id)->get();
+        return response()->json($data, 200);
+    }
+    public function addBookmark(Request $request,$id){
+        $product = Product::where('id',$id)->first();
+        // dd($product);
+        $auth_user_id = $request->auth_user_id;
+        $product_id = $product->id;
+        $wishlist = [
+            'user_id'=>$auth_user_id,
+            'product_id'=>$product_id,
+        ];
+        MyWishList::create($wishlist);
+        $wishlist_status = ['wishlist_status'=>1];
+        Product::where('id',$id)->update($wishlist_status);
+        $data = Product::find($id);
+        // return "Bookmark added.";
+        return response()->json($data, 200);
+    }
+    public function removeBookmark($id){
+        MyWishList::where('product_id',$id)->delete();
+        $wishlist_status = ['wishlist_status'=>0];
+        Product::where('id',$id)->update($wishlist_status);
+        $data = Product::find($id);
+        // dd($data);
+        // return "Bookmark removed.";
+        return response()->json($data, 200);
     }
 }

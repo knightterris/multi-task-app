@@ -15,6 +15,8 @@
     @endif
     <!-- ================= Favicon ================== -->
 
+    {{-- drop zone --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
     <!-- Retina iPad Touch Icon-->
@@ -26,6 +28,7 @@
     <!-- Standard iPhone Touch Icon-->
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
     <!-- Styles -->
+
     <link href="{{ asset('home/admin/css/lib/calendar2/pignose.calendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/themify-icons.css') }}" rel="stylesheet">
@@ -36,6 +39,9 @@
     <link href="{{ asset('home/admin/css/lib/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/lib/helper.css') }}" rel="stylesheet">
     <link href="{{ asset('home/admin/css/style.css') }}" rel="stylesheet">
+
+
+
 
     <link href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -356,13 +362,17 @@
     </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     @yield('scripts')
     {{-- logout --}}
+    {{-- dropzone --}}
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+
 
     <!-- jquery vendor -->
     <script src="{{ asset('home/admin/js/lib/jquery.min.js') }}"></script>

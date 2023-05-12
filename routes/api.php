@@ -51,3 +51,6 @@ Route::get('get/edit/product/data/{id}',[ProductAPIController::class,'getEditPro
 Route::post('delete/cover/image/{id}',[ProductAPIController::class,'deleteCoverImage']);
 Route::post('delete/each/image/{id}',[ProductAPIController::class,'deleteEachImage']);
 Route::post('update/product/{id}',[ProductAPIController::class,'updateProduct']);
+Route::get('get/my/wishlist/{id}',[ProductAPIController::class,'getMyWishList']);
+Route::post('add/bookmark/{id}',[ProductAPIController::class,'addBookmark']);
+Route::post('remove/bookmark/{id}',[ProductAPIController::class,'removeBookmark']);
