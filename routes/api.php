@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CommentApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\APIController;
@@ -59,3 +60,6 @@ Route::post('update/product/{id}',[ProductAPIController::class,'updateProduct'])
 Route::get('get/my/wishlist/{id}',[ProductAPIController::class,'getMyWishList']);
 Route::post('add/bookmark/{id}',[ProductAPIController::class,'addBookmark']);
 Route::post('remove/bookmark/{id}',[ProductAPIController::class,'removeBookmark']);
+
+//comments
+Route::post('post/comment',[CommentApiController::class,'postComment']);

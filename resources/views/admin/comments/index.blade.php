@@ -20,7 +20,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('admin.homepage') }}" class="text-dark text-decoration-none"><i
+                    <a href="{{ route('admin.homepage') }}" class="text-dark text-decoration-none "><i
                             class="ti-arrow-left text-dark"></i></a>
                 </div>
                 <div class="card-body">
