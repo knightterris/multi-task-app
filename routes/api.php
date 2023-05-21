@@ -6,6 +6,7 @@ use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\ProductAPIController;
 use App\Http\Controllers\API\CategoryAPIController;
+use App\Http\Controllers\API\ApiDataSearchingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('foodCategory',[APIController::class,'getFoodCategory']);
 Route::get('itemCategory',[APIController::class,'getItemCategory']);
-Route::get('allProducts',[APIController::class,'getAllProducts']);
+// Route::get('allProducts',[APIController::class,'getAllProducts']);
 
 //user login
 Route::post('user/login',[UserAPIController::class,'accountLogin']);
@@ -34,7 +35,10 @@ Route::post('get/user/data',[UserAPIController::class,'getUserDatawithID']);
 Route::post('update/profile',[UserAPIController::class,'updateProfile']);
 //change password
 Route::post('change/password',[UserAPIController::class,'changePassword']);
-
+//General Search
+Route::post('/search/data',[ApiDataSearchingController::class,'generalSearch']);
+//wishlist
+// Route::get('/myWishlist',[ProductAPIController::class,'getMyWishList']);
 
 //CRUDS
 Route::post('createFoodCategory',[CategoryAPIController::class,'createFoodCategory']);
@@ -43,6 +47,7 @@ Route::post('delete/foodCategory',[CategoryAPIController::class,'deleteFoodCateg
 Route::post('delete/itemCategory',[CategoryAPIController::class,'deleteItemCategory']);
 
 //product CRUDs
+Route::get('/allProducts',[ProductAPIController::class,'getAllProducts']);
 Route::get('get/categories',[ProductAPIController::class,'getCategories']);
 Route::post('create/product',[ProductAPIController::class,'createProduct']);
 Route::post('delete/product',[ProductAPIController::class,'deleteProduct']);

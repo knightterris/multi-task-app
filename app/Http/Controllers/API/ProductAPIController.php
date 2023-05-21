@@ -13,6 +13,10 @@ use App\Http\Controllers\Controller;
 
 class ProductAPIController extends Controller
 {
+    public function getAllProducts(){
+        $data = Product::get();
+        return response()->json($data, 200);
+    }
     public function getCategories(){
         $foodCategories = FoodCategory::get();
         $itemCategories = ItemCategory::get();
@@ -198,4 +202,5 @@ class ProductAPIController extends Controller
         // return "Bookmark removed.";
         return response()->json($data, 200);
     }
+
 }

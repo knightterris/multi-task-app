@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\User\CustomLogoutController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\ItemCategoryController;
+use App\Http\Controllers\Admin\DataSearchingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::prefix('admin')->group(function () {
     Route::post('update/profile/{id}',[AdminController::class,'updateProfile'])->name('admin.updateProfile');
     Route::get('change/password/page',[AdminPageController::class,'changePasswordPage'])->name('admin.changePasswordPage');
     Route::post('change/password',[AdminController::class,'changePassword'])->name('admin.changePassword');
+    Route::resource('/dataSearching', DataSearchingController::class);
     //wishlist
     Route::get('wishlist/page',[AdminPageController::class,'wishListPage'])->name('admin.wishlist.wishlistPage');
     //user management
@@ -91,6 +93,7 @@ Route::prefix('admin')->group(function () {
         Route::get('index',[AdminPageController::class,'myWall'])->name('admin.myWall.index');
         Route::post('change/profileDetails',[AdminController::class,'changeProfileDetails'])->name('admin.myWall.changeProfileDetails');
     });
+
 
 });
 Route::prefix('user')->group(function () {
