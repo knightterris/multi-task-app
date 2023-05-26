@@ -11,7 +11,7 @@ class Comment extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','product_id','message'];
-    // public function products(){
-    //     return $this->belongsTo(Product::class);
-    // }
+    public function user(){
+        return $this->belongsTo(User::class,"user_id","id");
+    }
 }

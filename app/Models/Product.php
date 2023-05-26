@@ -25,7 +25,7 @@ class Product extends Model
         'wishlist_status',
         // 'like_status'
     ];
-        // public function comments(){
-        //     return $this->hasMany(Comment::class);
-        // }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

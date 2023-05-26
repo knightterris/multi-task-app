@@ -63,3 +63,4 @@ Route::post('remove/bookmark/{id}',[ProductAPIController::class,'removeBookmark'
 
 //comments
 Route::post('post/comment',[CommentApiController::class,'postComment']);
+Route::get('get/comments',[CommentApiController::class,'getComments']);
