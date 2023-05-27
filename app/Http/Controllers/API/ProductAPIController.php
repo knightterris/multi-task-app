@@ -217,7 +217,6 @@ class ProductAPIController extends Controller
             'product_id'=>$request->product_id
         ];
         Reaction::create($reaction);
-        // $likes = Product::with('reactions')->where('product_id',$request->product_id)->where('id',$request->product_id)->get();
 
         $likes = Product::with(['reactions' => function ($query) use ($request) {
             $query->where('product_id', $request->product_id);
@@ -227,15 +226,20 @@ class ProductAPIController extends Controller
     }
 
     public function dislike(Request $request){
-        // return $request->product_id;
+        // product_id,user_id
         $product = Product::where('id',$request->product_id)->first();
-        $like = [
+        $data = [
             'like'=>$product->like - 1,
         ];
-        Product::where('id',$request->product_id)->update($like);
-        Reaction::where('product_id',$request->product_id)->delete();
-        $like['id'] = Product::where('id',$request->product_id)->pluck('id');
-        $like['like_status'] = 'disliked';
-        return response()->json($like, 200);
+        Product::where('id',$request->product_id)->update($data);
+
+        Reaction::where('user_id',$request->user_id)
+                ->where('product_id',$request->product_id)->delete();
+
+        // $likes = Product::with('reactions')->get();
+        // return response()->json($likes, 200);
+        $likeCount = Product::where('id', $request->product_id)->value('like');
+        return response()->json(['like' => $likeCount], 200);
     }
+
 }
