@@ -9,4 +9,7 @@ class Reaction extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','product_id'];
+    public function products(){
+        return $this->belongsTo(Product::class,"id","product_id");
+    }
 }

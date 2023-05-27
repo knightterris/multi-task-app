@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Image;
-use App\Models\MyWishList;
 use App\Models\Product;
+use App\Models\Reaction;
+use App\Models\MyWishList;
 use App\Models\FoodCategory;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ use App\Http\Controllers\Controller;
 class ProductAPIController extends Controller
 {
     public function getAllProducts(){
-        $data = Product::get();
+        $data = Product::with('reactions')->get();
+
         return response()->json($data, 200);
     }
     public function getCategories(){
@@ -203,4 +205,37 @@ class ProductAPIController extends Controller
         return response()->json($data, 200);
     }
 
+    public function addLike(Request $request){
+        // return $request->product_id;
+        $product = Product::where('id',$request->product_id)->first();
+        $like = [
+            'like'=>$product->like + 1,
+        ];
+        Product::where('id',$request->product_id)->update($like);
+        $reaction = [
+            'user_id'=>$request->user_id,
+            'product_id'=>$request->product_id
+        ];
+        Reaction::create($reaction);
+        // $likes = Product::with('reactions')->where('product_id',$request->product_id)->where('id',$request->product_id)->get();
+
+        $likes = Product::with(['reactions' => function ($query) use ($request) {
+            $query->where('product_id', $request->product_id);
+        }])->where('id', $request->product_id)->get();
+
+        return response()->json($likes, 200);
+    }
+
+    public function dislike(Request $request){
+        // return $request->product_id;
+        $product = Product::where('id',$request->product_id)->first();
+        $like = [
+            'like'=>$product->like - 1,
+        ];
+        Product::where('id',$request->product_id)->update($like);
+        Reaction::where('product_id',$request->product_id)->delete();
+        $like['id'] = Product::where('id',$request->product_id)->pluck('id');
+        $like['like_status'] = 'disliked';
+        return response()->json($like, 200);
+    }
 }
